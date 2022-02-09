@@ -29,7 +29,7 @@ export class FavoritesComponent implements OnInit {
     this.http.get(this.url + search).subscribe(data=>{
       
       this.movie = data as any;
-      
+      console.log(this.movie);
     });
   }
 

@@ -10,6 +10,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { FavoritesComponent } from './components/favorites/favorites.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { DecisionsComponent } from './decisions/decisions.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
     NavbarComponent,
     LoginComponent,
     UserProfileComponent,
-    FavoritesComponent
+    FavoritesComponent,
+    DecisionsComponent
   ],
   imports: [
     BrowserModule,

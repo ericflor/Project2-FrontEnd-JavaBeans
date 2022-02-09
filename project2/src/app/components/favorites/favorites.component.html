@@ -1,1 +1,5 @@
-<p>the movie: {{movies.results[0].title}}</p>
+<input type="text" [(ngModel)]="searchName">
+
+<button type="button" class="btn btn-success col-sm-4" (click)="searchFavs(searchName)">Search</button>
+
+<p *ngIf="movie">The movie: {{movie.results[0].title}}</p>

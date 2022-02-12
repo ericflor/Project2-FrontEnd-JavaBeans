@@ -11,6 +11,7 @@ import { FavoritesComponent } from './components/favorites/favorites.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { DecisionsComponent } from './decisions/decisions.component';
+import { GroupComponent } from './components/group/group.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { DecisionsComponent } from './decisions/decisions.component';
     LoginComponent,
     UserProfileComponent,
     FavoritesComponent,
-    DecisionsComponent
+    DecisionsComponent,
+    GroupComponent
   ],
   imports: [
     BrowserModule,

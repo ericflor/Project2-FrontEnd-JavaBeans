@@ -1,1 +1,13 @@
-<p>group works!</p>
+<h1>Manage Your Group</h1>
+<br>
+<br>
+<h3 *ngIf="inAGroup">{{groupName}}</h3>
+
+<div *ngIf="!inAGroup">
+    <label for="GroupForm">Group Name:</label>
+    <input id="GroupForm" type="text" [(ngModel)]="groupName">
+</div>
+<br>
+<button *ngIf="!inAGroup" id="CreateGroupBtn" class="btn btn-primary" (click)="createGroup()">Create Group</button>
+
+<button *ngIf="inAGroup" id="LeaveGroupBtn" class="btn btn-primary" (click)="leaveGroup()">Leave Group</button>

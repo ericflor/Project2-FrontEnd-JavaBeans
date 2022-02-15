@@ -17,10 +17,10 @@ export class DecisionsComponent implements OnInit {
   movieArray: any = []; // randomize which indices from response we receive 
   items: any;
   tenMovies: any;
-  movieIdArray: any;
+  movieTitleArray: any;
   oneMovieArray: any=[];
   favoritesArray: any=[];
-  url:string = "https://imdb-api.com/en/API/Top250Movies/k_muze8ch7/";
+  url:string = "https://imdb-api.com/en/API/Top250Movies/k_06em724z/";
 
   
 
@@ -61,39 +61,36 @@ export class DecisionsComponent implements OnInit {
 
 
   getIMDBIds(Ids:any){
-    this.movieIdArray = new Array(); //create an array to store just IDs
+    this.movieTitleArray = new Array(); //create an array to store just IDs
    for (var i = 0; i < 10; i++){ //loop through 10 movies
-    var movieIds = this.tenMovies[i].id
+    var movieTitles = this.tenMovies[i].title
    
-    let list = this.movieIdArray.push(movieIds);
+    let list = this.movieTitleArray.push(movieTitles);
    }
-   console.log(this.movieIdArray)
+   //console.log(this.movieTitleArray)
  }
   
  getOneMovie(Movie:any){
   this.oneMovieArray = new Array();
     if(this.tenMovies.length>0){
       let likeBtn:any = document.getElementById("likeBtn");
-      let dislikeBtn:any = document.getElementById("dislikeBtn");
-        likeBtn.addEventListener("click", ()=>{
-          
+      let dislikeBtn: any = document.getElementById("dislikeBtn");
+      
+      likeBtn.addEventListener("click", ()=>{ 
         this.oneMovieArray = []
-        let oneMovie = this.tenMovies.shift();
-          
+        let oneMovie = this.tenMovies.shift();  
         console.log(oneMovie);
         let nextMovie = this.oneMovieArray.push(oneMovie);
           
-        // console.log(nextMovie);
-        console.log(this.oneMovieArray[0].title);
       })
       dislikeBtn.addEventListener("click", ()=>{
           
         this.oneMovieArray = []
         let oneMovie = this.tenMovies.shift();
       
-        console.log(oneMovie);
+        //console.log(oneMovie);
         let nextMovie = this.oneMovieArray.push(oneMovie);
-        console.log(this.oneMovieArray);  
+        
       })
     }
   }

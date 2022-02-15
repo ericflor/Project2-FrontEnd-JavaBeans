@@ -2,15 +2,15 @@
 <button type="button" class="btn btn-success" (click)="getMovies(movieArray)">Get Movies</button>
 <div class="card text-center" >
 
-    <img src="https://www.freepnglogos.com/uploads/netflix-logo-circle-png-5.png" class="card-img-top" style=" display: block;
+    <img src="{{oneMovieArray[0].image}}" class="card-img-top" style=" display: block;
     margin-left: auto;
     margin-right: auto;
     width: 40%;" alt="...">
 
     <div class="card-body" >
-      <h5 id="movieTitle" class="card-title">Movie title</h5>
-      <p id="movieSynopsis" class="card-text">Movie Synopsis.</p>
-      <p  id="movieRating" class="card-text"><small class="text-muted">IMDB Rating:</small></p>
+      <h5 id="movieTitle" class="card-title">{{oneMovieArray[0].fullTitle}}</h5>
+      <!-- <p id="movieSynopsis" class="card-text">Movie Synopsis.</p> -->
+      <p  id="movieRating" class="card-text"><small class="text-muted">ImDb Rating: {{oneMovieArray[0].imDbRating}}</small></p>
       <button type="button" id="likeBtn"class="btn btn-success mx-3">Like</button>
       <button type="button" id="favBtn" class="btn btn-primary mx-3">Favorite</button>
       <button type="button" id="dislikeBtn" class="btn btn-danger mx-3">Dislike</button>

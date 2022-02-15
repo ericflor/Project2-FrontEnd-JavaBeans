@@ -53,7 +53,7 @@ export class DecisionsComponent implements OnInit {
       film[j] = temp;      //new element is picked
     }
     this.tenMovies = film.slice(0, 10); //reduce randomized list to 10 movies
-  
+    console.log(this.tenMovies)
     this.getIMDBIds(this.tenMovies);
     this.getOneMovie(this.tenMovies);
     this.addToFavorites(this.tenMovies);
@@ -77,64 +77,40 @@ export class DecisionsComponent implements OnInit {
       let dislikeBtn:any = document.getElementById("dislikeBtn");
         likeBtn.addEventListener("click", ()=>{
           
-            this.oneMovieArray = []
-          let oneMovie = this.tenMovies.shift();
-          // console.log(this.tenMovies);
+        this.oneMovieArray = []
+        let oneMovie = this.tenMovies.shift();
           
-          // console.log("button worked");
-          // console.log(tenMovies[k++].title);
-          // oneMovie.shift(this.tenMovies);
-          // console.log(this.tenMovies);
+        console.log(oneMovie);
+        let nextMovie = this.oneMovieArray.push(oneMovie);
           
-          console.log(oneMovie);
-          let nextMovie = this.oneMovieArray.push(oneMovie);
+        // console.log(nextMovie);
+        console.log(this.oneMovieArray[0].title);
+      })
+      dislikeBtn.addEventListener("click", ()=>{
           
-          // console.log(nextMovie);
-                    console.log(this.oneMovieArray[0].title);
-          // }
-          
-            
-          
-        })
-        dislikeBtn.addEventListener("click", ()=>{
-          
-            this.oneMovieArray = []
-          let oneMovie = this.tenMovies.shift();
+        this.oneMovieArray = []
+        let oneMovie = this.tenMovies.shift();
       
-          console.log(oneMovie);
-          let nextMovie = this.oneMovieArray.push(oneMovie);
-                    console.log(this.oneMovieArray);
-          
-            
-          
-        })
-      }
- }
+        console.log(oneMovie);
+        let nextMovie = this.oneMovieArray.push(oneMovie);
+        console.log(this.oneMovieArray);  
+      })
+    }
+  }
 
 
  addToFavorites(Movie:any){
   this.favoritesArray = new Array();
   if(this.tenMovies.length>0){
     let favBtn: any = document.getElementById("favBtn");
-  favBtn.addEventListener("click", () =>{
+    favBtn.addEventListener("click", () =>{
     
     this.favoritesArray = [];
     let currentMovie = this.oneMovieArray[0].title;
     let favoriteMovie = this.favoritesArray.push(currentMovie);
     console.log(favoriteMovie);
     
-  })
+    })
+  } 
   }
-  
 }
-}
-
-      
-
-      
-      
-    
-
-  
-
-

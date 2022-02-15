@@ -18,6 +18,8 @@ export class DecisionsComponent implements OnInit {
   items: any;
   tenMovies: any;
   movieIdArray: any;
+  oneMovieArray: any=[];
+  favoritesArray: any=[];
   url:string = "https://imdb-api.com/en/API/Top250Movies/k_muze8ch7/";
 
   
@@ -25,9 +27,11 @@ export class DecisionsComponent implements OnInit {
   constructor(private decisionsService:DecisionsService, private http:HttpClient) { }
 
   ngOnInit(): void {
+    
   }
 
-  // populate with array of ten movie objects from Response body of API call to imdbapi 
+ 
+// populate with array of ten movie objects from Response body of API call to imdbapi 
   getMovies(movieArray: any[]){
     this.movieArray = movieArray;
     
@@ -51,6 +55,8 @@ export class DecisionsComponent implements OnInit {
     this.tenMovies = film.slice(0, 10); //reduce randomized list to 10 movies
   
     this.getIMDBIds(this.tenMovies);
+    this.getOneMovie(this.tenMovies);
+    this.addToFavorites(this.tenMovies);
   }
 
 
@@ -64,4 +70,71 @@ export class DecisionsComponent implements OnInit {
    console.log(this.movieIdArray)
  }
   
+ getOneMovie(Movie:any){
+  this.oneMovieArray = new Array();
+    if(this.tenMovies.length>0){
+      let likeBtn:any = document.getElementById("likeBtn");
+      let dislikeBtn:any = document.getElementById("dislikeBtn");
+        likeBtn.addEventListener("click", ()=>{
+          
+            this.oneMovieArray = []
+          let oneMovie = this.tenMovies.shift();
+          // console.log(this.tenMovies);
+          
+          // console.log("button worked");
+          // console.log(tenMovies[k++].title);
+          // oneMovie.shift(this.tenMovies);
+          // console.log(this.tenMovies);
+          
+          console.log(oneMovie);
+          let nextMovie = this.oneMovieArray.push(oneMovie);
+          
+          // console.log(nextMovie);
+                    console.log(this.oneMovieArray[0].title);
+          // }
+          
+            
+          
+        })
+        dislikeBtn.addEventListener("click", ()=>{
+          
+            this.oneMovieArray = []
+          let oneMovie = this.tenMovies.shift();
+      
+          console.log(oneMovie);
+          let nextMovie = this.oneMovieArray.push(oneMovie);
+                    console.log(this.oneMovieArray);
+          
+            
+          
+        })
+      }
+ }
+
+
+ addToFavorites(Movie:any){
+  this.favoritesArray = new Array();
+  if(this.tenMovies.length>0){
+    let favBtn: any = document.getElementById("favBtn");
+  favBtn.addEventListener("click", () =>{
+    
+    this.favoritesArray = [];
+    let currentMovie = this.oneMovieArray[0].title;
+    let favoriteMovie = this.favoritesArray.push(currentMovie);
+    console.log(favoriteMovie);
+    
+  })
+  }
+  
 }
+}
+
+      
+
+      
+      
+    
+
+  
+
+

@@ -60,7 +60,7 @@ export class DecisionsComponent implements OnInit {
     this.tenMovies = film.slice(0, 10); //reduce randomized list to 10 movies
     console.log(this.tenMovies);
     this.getIMDBTitles(this.tenMovies);
-    this.getOneMovie(this.tenMovies);
+    this.makeDecision(this.tenMovies);
     // this.addToFavorites(this.tenMovies);
   }
 
@@ -75,7 +75,7 @@ export class DecisionsComponent implements OnInit {
     console.log(this.movieTitleArray)
   }
 
-  getOneMovie(Movie: any) {
+  makeDecision(Movie: any) {
     this.likedArray = new Array();
     if (this.tenMovies.length > 0) {
       let likeBtn: any = document.getElementById("likeBtn");
@@ -103,7 +103,7 @@ export class DecisionsComponent implements OnInit {
         console.log(this.likedArray);
         console.log(this.tenMovies);
         
-
+        return true;
       })
       dislikeBtn.addEventListener("click", () => {
 
@@ -125,13 +125,24 @@ export class DecisionsComponent implements OnInit {
         console.log(this.dislikedArray);
         console.log(this.tenMovies)
 
-
+        return false;
 
 
       })
     }
   }
 
+  addLiked(){
+    this.decisionsService.postLiked(this.likedArray).subscribe({
+      next:()=>{
+        console.log("added liked movies");
+        console.log(this.likedArray);
+        
+      },
+      error: () =>{console.log("something went wrong recording your liked movies.");
+      }
+    })
+  }
 
   //  addToFavorites(Movie:any){
   //   this.favoritesArray = new Array();

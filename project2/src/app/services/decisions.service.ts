@@ -16,7 +16,7 @@ export class DecisionsService {
     return this.http.get<Decisions>(this.url + "decisions");
   }
 
-  postLiked(name:any []){
+  postLiked(name:String){
 
     return this.http.post(this.url + "decisions", new Decisions(0, 1, name, true, 1));
 

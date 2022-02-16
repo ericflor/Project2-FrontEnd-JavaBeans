@@ -18,7 +18,7 @@ export class DecisionsComponent implements OnInit {
   tenMovies: any;
   movieTitleArray: any;
   likedArray: any = [];
-  dislikedArray: any =[];
+  dislikedArray: any = [];
   favoritesArray: any = [];
   oneMovieArray: any = [];
   url: string = "https://imdb-api.com/en/API/Top250Movies/k_06em724z/";
@@ -76,10 +76,14 @@ export class DecisionsComponent implements OnInit {
   }
 
   makeDecision(Movie: any) {
+
     this.likedArray = new Array();
+
     if (this.tenMovies.length > 0) {
       let likeBtn: any = document.getElementById("likeBtn");
       let dislikeBtn: any = document.getElementById("dislikeBtn");
+
+
 
       likeBtn.addEventListener("click", () => {
 
@@ -99,15 +103,19 @@ export class DecisionsComponent implements OnInit {
         console.log(this.oneMovieArray);
 
         // console.log(nextMovie);
-        
+
         console.log(this.likedArray);
         console.log(this.tenMovies);
-        
-        return true;
+
+        this.isLiked(this.oneMovieArray)
+        // console.log("getting to isliked function");
+
+
+        // return true;
       })
       dislikeBtn.addEventListener("click", () => {
 
-         // Empties one movie array to make it easier to just append the first index of this array each time in html
+        // Empties one movie array to make it easier to just append the first index of this array each time in html
         this.oneMovieArray = [];
 
         // takes first index in tenmovies array, takes it out of the array and returns it
@@ -115,34 +123,54 @@ export class DecisionsComponent implements OnInit {
 
         console.log(oneMovie);
 
-         // grab that movie in the first index that was shifted out and put it into a disliked movies array to hold it
+        // grab that movie in the first index that was shifted out and put it into a disliked movies array to hold it
         let nextMovie = this.dislikedArray.push(oneMovie);
 
         // Takes the shifted movie and puts it into a seperate array we call in the html to append it to the page.
         let appendedMovie = this.oneMovieArray.push(oneMovie);
         console.log(this.oneMovieArray);
-        
+
         console.log(this.dislikedArray);
         console.log(this.tenMovies)
 
-        return false;
+        // return false;
 
 
       })
     }
+
+  }
+  isLiked(Movie: any) {
+    for (var i = this.likedArray.length - 1; i = 0; i++) {
+      if (this.likedArray[i] == this.tenMovies.shift()) {
+        console.log(this.likedArray);
+        console.log(this.tenMovies.shift());
+        return true;
+      } else {
+        console.log("returned false");
+
+        return false;
+      }
+    }return true;
   }
 
-  addLiked(){
+
+
+
+  addLiked() {
     this.decisionsService.postLiked(this.likedArray).subscribe({
-      next:()=>{
+      next: () => {
         console.log("added liked movies");
         console.log(this.likedArray);
-        
+
       },
-      error: () =>{console.log("something went wrong recording your liked movies.");
+      error: () => {
+        console.log("something went wrong recording your liked movies.");
       }
     })
   }
+
+
 
   //  addToFavorites(Movie:any){
   //   this.favoritesArray = new Array();

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  serverURL: "http://localhost:8083/data/",
+  serverURL: "http://localhost:7000/data/",
   apiURL: "https://imdb-api.com/en/API/"
 };
 

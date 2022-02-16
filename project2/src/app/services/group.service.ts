@@ -18,7 +18,7 @@ export class GroupService {
   }
 
   createGroup(name:string){
-    return this.http.post(this.url+"group", new Group(0, name, true));
+    return this.http.post<Group>(this.url+"group", new Group(0, name, true));
   }
 
   updateGroup(group:Group){

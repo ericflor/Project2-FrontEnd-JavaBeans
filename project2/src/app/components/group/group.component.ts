@@ -27,7 +27,7 @@ export class GroupComponent implements OnInit {
 
   createGroup(){
     this.groupService.createGroup(this.groupName).subscribe({
-      next:(group:Group)=>{this.inAGroup=true}, 
+      next:(group:Group)=>{this.inAGroup=true} 
       //complete:()=>{this.activeModal.dismiss; console.log("dismiss?")}
     });
   }

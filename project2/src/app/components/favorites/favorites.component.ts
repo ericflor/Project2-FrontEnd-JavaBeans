@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FavoritesService } from 'src/app/services/favorites.service';
 
 
@@ -13,7 +13,6 @@ export class FavoritesComponent implements OnInit {
   url:string = "https://imdb-api.com/en/API/SearchMovie/k_06em724z/";
   movie: any;
   searchName: string = '';
-  movieName: any = document.getElementById("movie_name")?.innerHTML;
 
   constructor(private favoriteService:FavoritesService, private http:HttpClient) { }
 
@@ -34,14 +33,39 @@ export class FavoritesComponent implements OnInit {
     });
   }
 
-  addFav(){
+  addFav1(){
     
-    this.favoriteService.postFavs(this.movieName).subscribe({
+    this.favoriteService.postFavs(this.movie.results[0].title).subscribe({
       next:()=>{
         console.log("added a new fav!");
-        console.log(this.movieName)
+        console.log(this.movie.results[0].title);
+        
       },
-      error:()=>{console.log("something went wrong adding a your movie: " + this.movieName)}
+      error:()=>{console.log("something went wrong faving your movie: " + this.movie.results[0].title)}
+    });
+  }
+
+  addFav2(){
+    
+    this.favoriteService.postFavs(this.movie.results[1].title).subscribe({
+      next:()=>{
+        console.log("added a new fav!");
+        console.log(this.movie.results[1].title);
+        
+      },
+      error:()=>{console.log("something went wrong faving your movie: " + this.movie.results[1].title)}
+    });
+  }
+
+  addFav3(){
+    
+    this.favoriteService.postFavs(this.movie.results[2].title).subscribe({
+      next:()=>{
+        console.log("added a new fav!");
+        console.log(this.movie.results[2].title);
+        
+      },
+      error:()=>{console.log("something went wrong faving your movie: " + this.movie.results[2].title)}
     });
   }
 

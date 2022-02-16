@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { DecisionsComponent } from './decisions/decisions.component';
 import { GroupComponent } from './components/group/group.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,9 @@ import { GroupComponent } from './components/group/group.component';
     HttpClientModule,
     NgbModule
   ],
-  providers: [],
+  providers: [
+    CookieService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

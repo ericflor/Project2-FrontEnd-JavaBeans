@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Decisions } from '../models/decisions';
 import { DecisionsService } from '../services/decisions.service';
 
 
@@ -13,6 +14,7 @@ export class DecisionsComponent implements OnInit {
   movieImg: string = "";
   movieTitle: string = "";
   movieId: string = "";
+  imdbRating: string = "";
   movieArray: any = []; // randomize which indices from response we receive 
   items: any;
   tenMovies: any;
@@ -35,7 +37,8 @@ export class DecisionsComponent implements OnInit {
   getMovies(movieArray: any[]) {
     this.movieArray = movieArray;
 
-    this.http.get(this.url).subscribe(data => {
+   // this.http.get(this.url).subscribe(data => {
+      this.decisionsService.getMovies().subscribe(data => {
       this.movieArray = data;
       
       this.items = this.movieArray["items"] // returns items key in movieArray object
@@ -57,7 +60,9 @@ export class DecisionsComponent implements OnInit {
 
     }
     this.tenMovies = film.slice(0, 10); //reduce randomized list to 10 movies
-    console.log(this.tenMovies);
+    // let stringJson = JSON.stringify(this.tenMovies);
+    //   console.log(stringJson)
+    //console.log(this.tenMovies);
     this.getIMDBTitles(this.tenMovies);
     this.makeDecision(this.tenMovies);
     // this.addToFavorites(this.tenMovies);
@@ -67,7 +72,9 @@ export class DecisionsComponent implements OnInit {
   getIMDBTitles(Ids: any) {
     this.movieTitleArray = new Array(); //create an array to store just IDs
     for (var i = 0; i < 10; i++) { //loop through 10 movies
-      var movieTitles = this.tenMovies[i].title
+      let movieTitles = this.tenMovies[i].title
+      
+      // console.log(movieIds)
       //grab the title and push to array
       let list = this.movieTitleArray.push(movieTitles);
     }
@@ -80,27 +87,45 @@ export class DecisionsComponent implements OnInit {
       let likeBtn: any = document.getElementById("likeBtn");
       let dislikeBtn: any = document.getElementById("dislikeBtn");
 
-      likeBtn.addEventListener("click", () => {
+      let Decisions = {
+        id: this.tenMovies[0].id,
+        name: this.tenMovies[0].title,
+        liked:false
+      }
+      console.log(Decisions)
 
+      likeBtn.addEventListener("click", () => {
+        Decisions.liked = true
+        console.log(Decisions)
+      // // let movieIds = this.tenMovies[i].id
+      
         // Empties one movie array to make it easier to just append the first index of this array each time in html
         this.oneMovieArray = [];
 
         // takes first index in tenmovies array, takes it out of the array and returns it
         let oneMovie = this.tenMovies.shift();
+<<<<<<< HEAD
 
         console.log(oneMovie.title);
 
+=======
+        
+>>>>>>> 2588379a8022015d829c8ab4be26af281d52343a
         // grab that movie in the first index that was shifted out and put it into a liked movies array to hold it
         let nextMovie = this.likedArray.push(oneMovie);
-
+       
         // Takes the shifted movie and puts it into a seperate array we call in the html to append it to the page.
         let appendedMovie = this.oneMovieArray.push(oneMovie);
+<<<<<<< HEAD
         console.log(this.oneMovieArray.title);
 
         // console.log(nextMovie);
         
         console.log(this.likedArray);
         console.log(this.tenMovies);
+=======
+      //   console.log(this.oneMovieArray);
+>>>>>>> 2588379a8022015d829c8ab4be26af281d52343a
         
         // return true;
       })
@@ -112,21 +137,19 @@ export class DecisionsComponent implements OnInit {
         // takes first index in tenmovies array, takes it out of the array and returns it
         let oneMovie = this.tenMovies.shift();
 
-        console.log(oneMovie);
-
          // grab that movie in the first index that was shifted out and put it into a disliked movies array to hold it
         let nextMovie = this.dislikedArray.push(oneMovie);
 
         // Takes the shifted movie and puts it into a seperate array we call in the html to append it to the page.
         let appendedMovie = this.oneMovieArray.push(oneMovie);
-        console.log(this.oneMovieArray);
-        
-        console.log(this.dislikedArray);
-        console.log(this.tenMovies)
 
+<<<<<<< HEAD
         // return false;
 
 
+=======
+        return false;
+>>>>>>> 2588379a8022015d829c8ab4be26af281d52343a
       })
     }
   }
@@ -143,29 +166,20 @@ export class DecisionsComponent implements OnInit {
     })
   }
 
-  //  addToFavorites(Movie:any){
-  //   this.favoritesArray = new Array();
-  //   if(this.tenMovies.length>0){
-  //     let favBtn: any = document.getElementById("favBtn");
-  //   favBtn.addEventListener("click", () =>{
+   addToFavorites(Movie:any){
+    this.favoritesArray = new Array();
+    if(this.tenMovies.length>0){
+      let favBtn: any = document.getElementById("favBtn");
+      favBtn.addEventListener("click", () =>{
 
-  //     this.favoritesArray = [];
-  //     let currentMovie = this.dislikedArray[0].title;
-  //     let favoriteMovie = this.favoritesArray.push(currentMovie);
-  //     console.log(favoriteMovie);
+      this.favoritesArray = [];
+      let currentMovie = this.oneMovieArray[0].title;
+      let favoriteMovie = this.favoritesArray.push(currentMovie);
+        console.log(favoriteMovie);
+        console.log(this.favoritesArray);
 
-  //   })
-  //   }
+    })
+    }
 
-  // }
+  }
 }
-
-
-
-
-
-
-
-
-
-

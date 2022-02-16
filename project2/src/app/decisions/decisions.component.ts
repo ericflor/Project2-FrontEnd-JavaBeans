@@ -28,7 +28,6 @@ export class DecisionsComponent implements OnInit {
   constructor(private decisionsService: DecisionsService, private http: HttpClient) { }
 
   ngOnInit(): void {
-
   }
 
 
@@ -38,7 +37,7 @@ export class DecisionsComponent implements OnInit {
 
     this.http.get(this.url).subscribe(data => {
       this.movieArray = data;
-
+      
       this.items = this.movieArray["items"] // returns items key in movieArray object
 
       //console.log(items)
@@ -89,21 +88,21 @@ export class DecisionsComponent implements OnInit {
         // takes first index in tenmovies array, takes it out of the array and returns it
         let oneMovie = this.tenMovies.shift();
 
-        console.log(oneMovie);
+        console.log(oneMovie.title);
 
         // grab that movie in the first index that was shifted out and put it into a liked movies array to hold it
         let nextMovie = this.likedArray.push(oneMovie);
 
         // Takes the shifted movie and puts it into a seperate array we call in the html to append it to the page.
         let appendedMovie = this.oneMovieArray.push(oneMovie);
-        console.log(this.oneMovieArray);
+        console.log(this.oneMovieArray.title);
 
         // console.log(nextMovie);
         
         console.log(this.likedArray);
         console.log(this.tenMovies);
         
-        return true;
+        // return true;
       })
       dislikeBtn.addEventListener("click", () => {
 
@@ -125,7 +124,7 @@ export class DecisionsComponent implements OnInit {
         console.log(this.dislikedArray);
         console.log(this.tenMovies)
 
-        return false;
+        // return false;
 
 
       })

@@ -13,10 +13,10 @@ export class DecisionsService {
   constructor(private http:HttpClient) { }
 
   getMovies(){
-    return this.http.get<Decisions>(this.url + "decisions");
+    return this.http.get<Decisions[]>(this.url + "decisions");
   }
 
-  postLiked(name:any []){
+  postLiked(name:String){
 
     return this.http.post(this.url + "decisions", new Decisions(0, 1, name, true, 1));
 

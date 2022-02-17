@@ -11,6 +11,7 @@ import { User } from 'src/app/models/user';
 export class UserProfileComponent implements OnInit {
 
   user:any;
+  user2:any;
   imdbId:Array<string> = [];
 
   constructor(private cookieService: CookieService, private http:HttpClient) { }
@@ -29,17 +30,6 @@ export class UserProfileComponent implements OnInit {
 
   }
 
-  ngOnChanges(changes:SimpleChanges){
-    console.log(changes);
-
-    
-
-    this.user = this.cookieService.set("upNext_user", JSON.stringify(changes['body']));
-    this.user = JSON.parse(this.cookieService.get("upNext_user"));
-
-    for(var i = 0; i < this.user.favs.length; i++){
-      this.imdbId[i] = this.user.favs[i].imdbId;
-    }
-  }
+  //
 
 }

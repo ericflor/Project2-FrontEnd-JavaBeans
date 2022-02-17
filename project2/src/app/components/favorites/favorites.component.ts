@@ -44,9 +44,9 @@ export class FavoritesComponent implements OnInit {
       next:(response)=>{
         console.log("added a new fav!");
         console.log(this.movie.results[0].title);
-        this.cookieService.set("upNext_user", JSON.stringify(response));
+        this.cookieService.set("upNext_user", JSON.stringify(response.body));
         this.user = JSON.parse(this.cookieService.get("upNext_user"));
-        console.log(this.cookieService.get("upNext_user"));
+        console.log(this.user);
         
       },
       error:()=>{console.log("something went wrong faving your movie: " + this.movie.results[0].title)}
@@ -59,9 +59,9 @@ export class FavoritesComponent implements OnInit {
       next:(response)=>{
         console.log("added a new fav!");
         console.log(this.movie.results[1].title);
-        this.cookieService.set("upNext_user", JSON.stringify(response));
+        this.cookieService.set("upNext_user", JSON.stringify(response.body));
         this.user = JSON.parse(this.cookieService.get("upNext_user"));
-        console.log(this.cookieService.get("upNext_user"));
+        console.log(this.user);
         
       },
       error:()=>{console.log("something went wrong faving your movie: " + this.movie.results[1].title)}
@@ -74,9 +74,9 @@ export class FavoritesComponent implements OnInit {
       next:(response)=>{
         console.log("added a new fav!");
         console.log(this.movie.results[2].title);
-        this.cookieService.set("upNext_user", JSON.stringify(response));
+        this.cookieService.set("upNext_user", JSON.stringify(response.body));
         this.user = JSON.parse(this.cookieService.get("upNext_user"));
-        console.log(this.cookieService.get("upNext_user"));
+        console.log(this.user);
         
       },
       error:()=>{console.log("something went wrong faving your movie: " + this.movie.results[2].title)}

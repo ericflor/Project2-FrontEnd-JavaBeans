@@ -14,20 +14,13 @@ export class DecisionsService {
   constructor(private http:HttpClient) { }
 
   getMovies(){
-<<<<<<< HEAD
-    return this.http.get<Decisions[]>(this.url + "decisions");
-  }
-
-  postLiked(name:String){
-=======
     //return this.http.get<Decisions>(this.url + "decisions");
     return this.http.get<Decisions>(this.apiURL);
   }
 
   postLiked(imdbId:string){
->>>>>>> 2588379a8022015d829c8ab4be26af281d52343a
 
-    return this.http.post(this.url + "decisions", new Decisions("", 1, imdbId, true, 1));
+    return this.http.post(this.url + "decisions", new Decisions(0, 1, imdbId, "", true, 1));
 
   }
 }

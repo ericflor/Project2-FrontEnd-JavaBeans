@@ -45,6 +45,11 @@ export class DecisionsComponent implements OnInit {
 
       //console.log(items)
       this.randomizeList(this.items)
+
+      // Hide get movies button after clicked
+      let getMoviesBtn:any = document.getElementById("getMoviesBtn");
+      getMoviesBtn.isvisible=false;
+
     })
   }
 
@@ -88,14 +93,14 @@ export class DecisionsComponent implements OnInit {
       let dislikeBtn: any = document.getElementById("dislikeBtn");
 
       let Decisions = {
-        id: this.tenMovies[0].id,
-        name: this.tenMovies[0].title,
-        liked:false
+        imdbId: this.tenMovies[0].id,
+        title: this.tenMovies[0].title,
+        choice:false
       }
       console.log(Decisions)
 
       likeBtn.addEventListener("click", () => {
-        Decisions.liked = true
+        Decisions.choice = true
         console.log(Decisions)
       // // let movieIds = this.tenMovies[i].id
       
@@ -104,30 +109,17 @@ export class DecisionsComponent implements OnInit {
 
         // takes first index in tenmovies array, takes it out of the array and returns it
         let oneMovie = this.tenMovies.shift();
-<<<<<<< HEAD
-
-        console.log(oneMovie.title);
-
-=======
         
->>>>>>> 2588379a8022015d829c8ab4be26af281d52343a
         // grab that movie in the first index that was shifted out and put it into a liked movies array to hold it
         let nextMovie = this.likedArray.push(oneMovie);
        
         // Takes the shifted movie and puts it into a seperate array we call in the html to append it to the page.
         let appendedMovie = this.oneMovieArray.push(oneMovie);
-<<<<<<< HEAD
-        console.log(this.oneMovieArray.title);
-
-        // console.log(nextMovie);
-        
-        console.log(this.likedArray);
-        console.log(this.tenMovies);
-=======
       //   console.log(this.oneMovieArray);
->>>>>>> 2588379a8022015d829c8ab4be26af281d52343a
         
         // return true;
+
+        // if undefined unhide get movies button; or if tenmovies.length
       })
       dislikeBtn.addEventListener("click", () => {
 
@@ -143,28 +135,12 @@ export class DecisionsComponent implements OnInit {
         // Takes the shifted movie and puts it into a seperate array we call in the html to append it to the page.
         let appendedMovie = this.oneMovieArray.push(oneMovie);
 
-<<<<<<< HEAD
-        // return false;
-
-
-=======
-        return false;
->>>>>>> 2588379a8022015d829c8ab4be26af281d52343a
+        // if undefined unhide get movies button; or if tenmovies.length
       })
     }
   }
 
-  addLiked(){
-    this.decisionsService.postLiked(this.likedArray).subscribe({
-      next:()=>{
-        console.log("added liked movies");
-        console.log(this.likedArray);
-        
-      },
-      error: () =>{console.log("something went wrong recording your liked movies.");
-      }
-    })
-  }
+  
 
    addToFavorites(Movie:any){
     this.favoritesArray = new Array();

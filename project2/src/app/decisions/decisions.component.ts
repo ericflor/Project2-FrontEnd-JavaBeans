@@ -30,7 +30,7 @@ export class DecisionsComponent implements OnInit {
     id: 0,
     roundId: this.newRound,
     imdbId: "",
-    movieTitle: "",
+    title: "",
     choice: false,
     userId: 0
   }
@@ -55,7 +55,6 @@ export class DecisionsComponent implements OnInit {
       this.items = this.movieArray["items"] // returns items key in movieArray object
 
       this.newRound = this.decisions.roundId++
-      //console.log(items)
       this.randomizeList(this.items)
     })
   }
@@ -73,11 +72,9 @@ export class DecisionsComponent implements OnInit {
     }
     this.tenMovies = film.slice(0, 10); //reduce randomized list to 10 movies
     // let stringJson = JSON.stringify(this.tenMovies);
-    //   console.log(stringJson)
-    //console.log(this.tenMovies);
+  
     this.getIMDBTitles(this.tenMovies);
     this.makeDecision(this.tenMovies);
-    // this.addToFavorites(this.tenMovies);
   }
 
 
@@ -86,7 +83,6 @@ export class DecisionsComponent implements OnInit {
     for (var i = 0; i < 10; i++) { //loop through 10 movies
       let movieTitles = this.tenMovies[i].title
       
-      // console.log(movieIds)
       //grab the title and push to array
       let list = this.movieTitleArray.push(movieTitles);
     }
@@ -99,15 +95,12 @@ export class DecisionsComponent implements OnInit {
       let likeBtn: any = document.getElementById("likeBtn");
       let dislikeBtn: any = document.getElementById("dislikeBtn");
 
-     
-      //console.log(Decisions)
-
       likeBtn.addEventListener("click", () => {
        this.decisions = {
         id: 0,
         roundId: this.newRound,
         imdbId: this.tenMovies[0].id,
-        movieTitle: this.tenMovies[0].title,
+        title: this.tenMovies[0].title,
         choice: false,
         userId:0
        }
@@ -133,7 +126,7 @@ export class DecisionsComponent implements OnInit {
         id: 0,
         roundId: this.newRound,
         imdbId: this.tenMovies[0].id,
-        movieTitle: this.tenMovies[0].title,
+        title: this.tenMovies[0].title,
         choice: false,
         userId:0
       }

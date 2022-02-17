@@ -108,7 +108,17 @@ export class DecisionsComponent implements OnInit {
         choice: false,
         userId:0
        }
+      // postLiked() {
+      //   let decisions = new Decisions(0, 0,"","",true, 0)
+      //   this.ps.postLiked(decisions).subscribe(
+      //     (response: Decisions) => {
+      //       this.decisions = response;
+      //     }
+      //   )
+      // }
         this.decisions.choice = true
+        
+        this.decisionsService.postLiked(this.decisions);
         // Empties one movie array to make it easier to just append the first index of this array each time in html
         this.oneMovieArray = [];
 
@@ -135,6 +145,8 @@ export class DecisionsComponent implements OnInit {
         userId:0
       }
         this.decisions.choice = false
+        this.decisionsService.postLiked(this.decisions);
+
          // Empties one movie array to make it easier to just append the first index of this array each time in html
         this.oneMovieArray = [];
 

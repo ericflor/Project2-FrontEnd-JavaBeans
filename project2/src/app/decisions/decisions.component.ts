@@ -24,6 +24,7 @@ export class DecisionsComponent implements OnInit {
   favoritesArray: any = [];
   oneMovieArray: any = [];
   url: string = "https://imdb-api.com/en/API/Top250Movies/k_06em724z/";
+  // decisionBtn: boolean = true;
   visible: boolean = false;
   newRound: number = 0;
   decisions: Decisions = {
@@ -43,17 +44,15 @@ export class DecisionsComponent implements OnInit {
 
   // populate with array of ten movie objects from Response body of API call to imdbapi 
   getMovies(movieArray: any[]) {
-    this.visible = true
-    //let btn = document.getElementById("movitBtn").style.display = "none"
+    this.visible = true   //make button disappear when clicked
+    // this.decisionBtn = false
     this.movieArray = movieArray;
-
-   // this.http.get(this.url).subscribe(data => {
+      // this.http.get(this.url).subscribe(data => {
       this.decisionsService.getMovies().subscribe(data => {
       this.movieArray = data;
-      
-      this.items = this.movieArray["items"] // returns items key in movieArray object
+      this.decisions.roundId = this.newRound++ //increment round everytime new list is called
 
-      this.newRound = this.decisions.roundId++
+      this.items = this.movieArray["items"] // returns items key in movieArray object
       this.randomizeList(this.items)
 
       // Hide get movies button after clicked
@@ -66,16 +65,12 @@ export class DecisionsComponent implements OnInit {
   //create a randomized list of 10 movies
   randomizeList(film: any) {
     for (var i = film.length - 1; i > 0; i--) {  //loop through each movie
-
       var j = Math.floor(Math.random() * (i + 1)); //element from array is chosen
       var temp = film[i];  //element is picked
       film[i] = film[j];   //current element is swapped with random
       film[j] = temp;      //new element is picked
-
-
     }
     this.tenMovies = film.slice(0, 10); //reduce randomized list to 10 movies
-    // let stringJson = JSON.stringify(this.tenMovies);
   
     this.getIMDBTitles(this.tenMovies);
     this.makeDecision(this.tenMovies);
@@ -90,17 +85,17 @@ export class DecisionsComponent implements OnInit {
       //grab the title and push to array
       let list = this.movieTitleArray.push(movieTitles);
     }
-    console.log(this.movieTitleArray)
   }
 
   makeDecision(Movie: any) {
     this.likedArray = new Array();
-    if (this.tenMovies.length > 0) {
+    if (this.tenMovies.length > 0) { //if movies are available, enable buttons for decisions
       let likeBtn: any = document.getElementById("likeBtn");
       let dislikeBtn: any = document.getElementById("dislikeBtn");
-
+      
       likeBtn.addEventListener("click", () => {
-       this.decisions = {
+
+       this.decisions = { //create new decisions object when deciding for each movie
         id: 0,
         roundId: this.newRound,
         imdbId: this.tenMovies[0].id,
@@ -117,8 +112,7 @@ export class DecisionsComponent implements OnInit {
       //   )
       // }
         this.decisions.choice = true
-        
-        this.decisionsService.postLiked(this.decisions);
+        this.decisionsService.postLiked(this.decisions)
         // Empties one movie array to make it easier to just append the first index of this array each time in html
         this.oneMovieArray = [];
 
@@ -126,6 +120,7 @@ export class DecisionsComponent implements OnInit {
         let oneMovie = this.tenMovies.shift();
         if (this.tenMovies.length == 0) {
           this.visible = false
+          //this.decisionBtn = true
         }
         // grab that movie in the first index that was shifted out and put it into a liked movies array to hold it
         let nextMovie = this.likedArray.push(oneMovie);
@@ -145,15 +140,15 @@ export class DecisionsComponent implements OnInit {
         userId:0
       }
         this.decisions.choice = false
-        this.decisionsService.postLiked(this.decisions);
-
+        this.decisionsService.postLiked(this.decisions)
          // Empties one movie array to make it easier to just append the first index of this array each time in html
         this.oneMovieArray = [];
 
         // takes first index in tenmovies array, takes it out of the array and returns it
         let oneMovie = this.tenMovies.shift();
          if (this.tenMovies.length == 0) {
-          this.visible = false
+           this.visible = false
+          //this.decisionBtn = true
         }
          // grab that movie in the first index that was shifted out and put it into a disliked movies array to hold it
         let nextMovie = this.dislikedArray.push(oneMovie);

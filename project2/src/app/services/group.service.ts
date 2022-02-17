@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Group } from '../models/group';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -14,14 +15,18 @@ export class GroupService {
   constructor(private http:HttpClient) { }
 
   getGroup(){
-    return this.http.get<Group>(this.url+"group");
+    return this.http.get<Group>(this.url+"group", {observe:"response", withCredentials:true, responseType:"json"});
   }
 
   createGroup(name:string){
-    return this.http.post<Group>(this.url+"group", new Group(0, name, true));
+    return this.http.post<User>(this.url+"group", new Group({name:name, open:true}), {withCredentials:true});
   }
 
   updateGroup(group:Group){
-    return this.http.put(this.url+"group", group);
+    return this.http.put<Group>(this.url+"group", group, {withCredentials:true});
+  }
+
+  leaveGroup(){
+    return this.http.put<User>(this.url+"group/leave", null, {withCredentials:true});
   }
 }

@@ -16,7 +16,8 @@ export class LoginComponent implements OnInit {
   username: String = '';
   password: String = '';
   url: String = environment.serverURL;
-  user:User = new User(0, "", "", "", new Group(0, "", true),0, "", Array<Favorites>(new Favorites("")));
+  user:User = new User();
+  show:boolean =false;
 
 
   constructor(private cookieService: CookieService, private httpClient:HttpClient) { }
@@ -27,17 +28,28 @@ export class LoginComponent implements OnInit {
   login(){
     this.httpClient.post<User>(this.url + "login", {"username":this.username, "password":this.password}, {observe:'response', withCredentials:true}).subscribe({
       next:(data:any)=>{
-        console.log(data)
-        this.user = data.body; 
-        this.cookieService.set("upNext_user", data.headers.get("Set-Cookie"));
+        this.user = data.body;
+        if(this.user.group==null){
+          this.user.group=new Group();
+        }
+        this.cookieService.set("upNext_user", JSON.stringify(data.body));
         console.log(this.cookieService.get("upNext_user"));
         console.log(this.user)},
       error:()=>{console.log("nope")},
       complete: ()=>{console.log(this.cookieService.get("upNext_user"));}
     });
-    console.log("nada");
+    console.log("login");
     
 
+  }
+
+  signup(){
+    console.log("clicked sign up");
+    console.log(this.user);
+    this.httpClient.post(this.url + "user", this.user, {observe:'response', withCredentials:true}).subscribe({
+      next: response=>{this.show = true; console.log(response)},
+      error: response=>{console.log("Error "+response)}
+    });
   }
 
 }

@@ -13,15 +13,16 @@
                               <!-- <div class="group"> <input id="check" type="checkbox" class="check" checked> <label for="check"><span class="icon"></span> Keep me Signed in</label> </div> -->
                               <div class="group"> <input type="submit" class="button" value="Sign In" (click)="login()"> </div>
                               <div class="hr"></div>
-                              <div class="foot"> <a href="#">Forgot Password?</a> </div>
                           </div>
                           <div class="sign-up-form">
-                              <div class="group"> <label for="user" class="label form-label">Username</label> <input id="user" type="text" class="input" placeholder="Create your Username"> </div>
-                              <div class="group"> <label for="pass" class="label form-label">Password</label> <input id="pass" type="password" class="input" data-type="password" placeholder="Create your password"> </div>
-                              <div class="group"> <label for="pass" class="label form-label">Repeat Password</label> <input id="pass" type="password" class="input" data-type="password" placeholder="Repeat your password"> </div>
-                              <div class="group"> <label for="pass" class="label form-label">Email Address</label> <input id="pass" type="text" class="input" placeholder="Enter your email address"> </div>
-                              <div class="group"> <input type="submit" class="button" value="Sign Up"> </div>
-                              <div class="hr"></div>
+                              <div class="group"> <label for="user" class="label form-label">Username</label> <input id="user" type="text" class="input" placeholder="Create your Username" [(ngModel)]="user.username"> </div>
+                              <div class="group"> <label for="pass" class="label form-label">Password</label> <input id="pass" type="password" class="input" data-type="password" placeholder="Create your password" [(ngModel)]="user.password"> </div>
+                              <div class="group"> <label for="pass" class="label form-label">Email Address</label> <input id="pass" type="text" class="input" placeholder="Enter your email address" [(ngModel)]="user.email"> </div>
+                              <div class="group"> <label for="pass" class="label form-label">First Name</label> <input id="pass" type="text" class="input" placeholder="Enter your first name" [(ngModel)]="user.firstName"> </div>
+                              <div class="group"> <label for="pass" class="label form-label">Last Name</label> <input id="pass" type="text" class="input" placeholder="Enter your last name" [(ngModel)]="user.lastName"> </div>
+                              <div class="group"> <input type="submit" class="button" value="Sign Up" (click)="signup()"> </div>
+                              <div class="group"> <label *ngIf="show" class="label form-label">Thank you for registering. Please log in.</label></div>
+                              <!-- <div class="hr"></div> -->
                               <div class="foot"> <label for="tab-1">Already Member?</label> </div>
                           </div>
                       </div>

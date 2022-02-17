@@ -12,6 +12,6 @@
         </span>
       
         <!-- if user logged in, show button *ngIf -->
-        <button onclick="this.style.backgroundColor = '#21cc76'" class="btn btn-primary" id="logoutBtn" (click)="logout()">Logout</button>
+        <button onclick="this.style.backgroundColor = '#21cc76'" class="btn btn-primary" id="logoutBtn" (click)="logout()" (click)="goToPage('login')">Logout</button>
     </div>
 </nav>

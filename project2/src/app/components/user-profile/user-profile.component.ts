@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { User } from 'src/app/models/user';
 
@@ -10,21 +11,35 @@ import { User } from 'src/app/models/user';
 export class UserProfileComponent implements OnInit {
 
   user:any;
+  imdbId:Array<string> = [];
 
-  constructor(private cookieService: CookieService) { }
+  constructor(private cookieService: CookieService, private http:HttpClient) { }
 
   ngOnInit(): void {
-
-    //console.log(this.cookieService.get("upNext_user"));
 
     this.user = JSON.parse(this.cookieService.get("upNext_user"));
     console.log(this.user);
 
 
+    for(var i = 0; i < this.user.favs.length; i++){
+      this.imdbId[i] = this.user.favs[i].imdbId;
+    }
+    
+    
 
-    //this.username = this.cookieService.get("upNext_user");
-    //this.cookieData = this.cookieService.get("upNext_user");
-    //this.username = this.cookieData.username;
+  }
+
+  ngOnChanges(changes:SimpleChanges){
+    console.log(changes);
+
+    
+
+    this.user = this.cookieService.set("upNext_user", JSON.stringify(changes['body']));
+    this.user = JSON.parse(this.cookieService.get("upNext_user"));
+
+    for(var i = 0; i < this.user.favs.length; i++){
+      this.imdbId[i] = this.user.favs[i].imdbId;
+    }
   }
 
 }

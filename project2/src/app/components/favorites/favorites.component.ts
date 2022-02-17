@@ -14,7 +14,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class FavoritesComponent implements OnInit {
 
-  url:string = "https://imdb-api.com/en/API/SearchMovie/k_06em724z/";
+  url:string = "https://imdb-api.com/en/API/SearchMovie/k_19lmdqtz/";
   movie: any;
   searchName: string = '';
   user:User = new User();

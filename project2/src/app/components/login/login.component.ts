@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   user:User = new User();
   show:boolean =false;
   show2:boolean = false;
+  loginUser:any;
 
 
   constructor(private router: Router, private route: ActivatedRoute, private cookieService: CookieService, private httpClient:HttpClient) { }
@@ -39,9 +40,13 @@ export class LoginComponent implements OnInit {
 
         this.cookieService.set("upNext_user", JSON.stringify(data.body));
         console.log(this.cookieService.get("upNext_user"));
-        console.log(this.user)},
+        //console.log(this.user)
+      },
       error:()=>{this.show2 = true; console.log("Invalid Credentials")},
-      complete: ()=>{console.log(this.cookieService.get("upNext_user"));}
+      complete: ()=>{
+        //JSON.parse(this.cookieService.get("upNext_user"));
+        //console.log(JSON.parse(this.cookieService.get("upNext_user")));
+      }
     });
   }
 

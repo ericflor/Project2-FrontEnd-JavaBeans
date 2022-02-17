@@ -1,13 +1,19 @@
 <div class="container">
     <header class="header">
-      <p>Profile Info:</p>
-      <p>Username: {{user.body.username}}</p>
-      <span>Name: {{user.body.firstName}} {{user.body.lastName}}</span>
+      <h3>Profile Info:</h3>
+      <p>
+        <b>Username:</b> {{user.username}} 
+        <br>      
+        <b>Full Name:</b> {{user.firstName}} {{user.lastName}}
+        <br>      
+        <b>Email: </b> {{user.email}}
+      </p>
+      
     </header>
   
     <!-- Replace <div> with <aside> if your content has one aside. For more than one, nest <aside> elements in the <div>. -->
     <div>
-      <p>Groups:</p>
+      <h3>Groups:</h3>
     </div>
   
     <main class="content">
@@ -16,17 +22,8 @@
   
  
     <div>
-      <p>Favorites:</p>
-      <!-- <p>{{user.body.favs[0].imdbId}}</p>
-      <p>{{user.body.favs[1].imdbId}}</p>
-      <p>{{user.body.favs[2].imdbId}}</p>
-      <p>{{user.body.favs[3].imdbId}}</p>
-      <p>{{user.body.favs[4].imdbId}}</p>
-      <p>{{user.body.favs[5].imdbId}}</p>
-      <p>{{user.body.favs[6].imdbId}}</p>
-      <p>{{user.body.favs[7].imdbId}}</p>
-      <p>{{user.body.favs[8].imdbId}}</p>
-      <p>{{user.body.favs[9].imdbId}}</p> -->
+      <h3>Favorites:</h3>
+      <p>{{imdbId}}</p>
     </div>
   
     <!-- <footer class="footer">

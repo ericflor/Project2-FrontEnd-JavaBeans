@@ -1,4 +1,5 @@
 export class Decisions {
 
-    constructor(public id:number, public roundId:number, public name:String, public open:boolean, public userId:number){}
+    //adjust constructor to match Db
+    constructor(public id:number, public roundId:number, public imdbId:string, public title:string, public choice:boolean, public userId:number){}
 }

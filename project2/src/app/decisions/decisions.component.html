@@ -1,9 +1,9 @@
 <!-- Create modal with pic of movie, its synopsis, and add buttons for liked, disliked, and favorited. Add logic to add favorited movies into favorites component -->
-<button type="button" class="btn btn-success" (click)="getMovies(movieArray)">Get Movies</button>
+<button type="button" class="btn btn-success" [hidden]="visible" id="movitBtn" (click)="getMovies(movieArray)">Get Movies</button>
 <div class="card text-center" >
 
-    <img src=
-    "{{oneMovieArray[0].image}}"
+    <img [src]=
+    "tenMovies[0].image"
      class="card-img-top" style=" display: block;
     margin-left: auto;
     margin-right: auto;
@@ -11,11 +11,11 @@
 
     <div class="card-body" >
       <h5 id="movieTitle" class="card-title">
-        {{oneMovieArray[0].fullTitle}}
+        {{tenMovies[0].fullTitle}}
       </h5>
-      <p  id="movieRating" class="card-text"><small class="text-muted">ImDb Rating: {{oneMovieArray[0].imDbRating}}</small></p>
-      <button type="button" id="likeBtn"class="btn btn-success mx-3">Like</button>
-      <button type="button" id="favBtn" class="btn btn-primary mx-3">Favorite</button>
-      <button type="button" id="dislikeBtn" class="btn btn-danger mx-3">Dislike</button>
+      <p  id="movieRating" class="card-text"><small class="text-muted">ImDb Rating: {{tenMovies[0].imDbRating}}</small></p>
+      <button type="button" id="likeBtn"class="btn btn-success mx-3" >Like</button>
+      <button type="button" id="favBtn" class="btn btn-primary mx-3" >Favorite</button>
+      <button type="button" id="dislikeBtn" class="btn btn-danger mx-3" >Dislike</button>
     </div>
   

@@ -18,9 +18,10 @@ export class DecisionsService {
     return this.http.get<Decisions>(this.apiURL);
   }
 
-  postLiked(imdbId:string){
+  postLiked(decisions:Decisions){
 
-    return this.http.post(this.url + "decisions", new Decisions(0, 1, imdbId, "", true, 1));
+    console.log(decisions)
+    return this.http.post(this.url + "decisions", decisions, {withCredentials: true});
 
   }
 }

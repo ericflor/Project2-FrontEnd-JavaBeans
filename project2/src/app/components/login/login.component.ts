@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   username: String = '';
   password: String = '';
   url: String = environment.serverURL;
-  user:User = new User("", "", "", "", "",0);
+  user:User = new User();
   show:boolean =false;
 
 
@@ -28,15 +28,17 @@ export class LoginComponent implements OnInit {
   login(){
     this.httpClient.post<User>(this.url + "login", {"username":this.username, "password":this.password}, {observe:'response', withCredentials:true}).subscribe({
       next:(data:any)=>{
-        console.log(data)
-        this.user = data.body; 
-        this.cookieService.set("upNext_user", data.headers.get("Set-Cookie"));
+        this.user = data.body;
+        if(this.user.group==null){
+          this.user.group=new Group();
+        }
+        this.cookieService.set("upNext_user", JSON.stringify(data.body));
         console.log(this.cookieService.get("upNext_user"));
         console.log(this.user)},
       error:()=>{console.log("nope")},
       complete: ()=>{console.log(this.cookieService.get("upNext_user"));}
     });
-    console.log("nada");
+    console.log("login");
     
 
   }

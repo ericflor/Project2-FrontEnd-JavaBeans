@@ -1,18 +1,20 @@
 <h1>Manage Your Group</h1>
 <br>
 <br>
-<div *ngIf="!inAGroup; else groupTitle">
-    <button id="CreateGroupBtn" class="btn btn-primary m-2" (click)="open(createName)">Create Group</button>
-    <button id="LeaveGroupBtn" class="btn btn-primary m-2" (click)="joinGroup()">Join Group</button>
+<div *ngIf="user.group.id==0; else groupTitle">
+    <button class="btn btn-primary m-2" (click)="open(createName)">Create Group</button>
+    <button class="btn btn-primary m-2" (click)="joinGroup()">Join Group</button>
 </div>
 <ng-template #groupTitle>
-    <h4 *ngIf="inAGroup">Your group:</h4>
-    <h2 *ngIf="inAGroup">{{groupName}}</h2>
+    <h4>Your group:</h4>
+    <h2>{{user.group.name}}</h2>
+    <button *ngIf="user.roleId==2" class="btn btn-primary m-2" >Update Group</button>
+    <button class="btn btn-primary m-2" (click)="leaveGroup()">Leave Group</button>
 </ng-template>
 <br>
 
 
-<button *ngIf="inAGroup" id="LeaveGroupBtn" class="btn btn-primary" (click)="leaveGroup()">Leave Group</button>
+
 
 <ng-template #createName let-modal>
     <div class="modal-header">
@@ -22,17 +24,36 @@
     <div class="modal-body">
       <form>
         <div class="mb-3">
-          <label for="dateOfBirth">Group Name</label>
+          <label for="name">Group Name</label>
           <div class="input-group">
-            <input id="name" type="text" name="inputName" [(ngModel)]="groupName">
+            <input id="name" type="text" name="inputName" [(ngModel)]="user.group.name">
           </div>
         </div>
       </form>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-danger" (click)="modal.dismiss()">Cancel</button>
-      <button type="button" class="btn btn-outline-primary" (click)="modal.close()">Create</button>
+      <button type="button" class="btn btn-outline-primary" (click)="modal.close('create')">Create</button>
     </div>
   </ng-template>
 
-  <button type="button" class="close" aria-label="Close"></button>
+  <ng-template #join let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Get Together</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">X</button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="mb-3">
+          <label for="id">Group Code</label>
+          <div class="input-group">
+            <input id="id" type="text" name="inputName" [(ngModel)]="user.group.id">
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-danger" (click)="modal.dismiss()">Cancel</button>
+      <button type="button" class="btn btn-outline-primary" (click)="modal.close('join')">Create</button>
+    </div>
+  </ng-template>

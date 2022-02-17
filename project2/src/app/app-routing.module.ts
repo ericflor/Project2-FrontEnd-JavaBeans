@@ -14,6 +14,9 @@ component: DecisionsComponent
 },{
   path : "group",
   component : GroupComponent
+},{
+  path : "user",
+  component : UserProfileComponent
 }
 ];
 

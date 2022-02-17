@@ -22,8 +22,7 @@ export class FavoritesService {
     console.log(name);
 
 
-    return this.http.post(this.url + "favorites", new Favorites(name), {withCredentials: true}
-    )
+    return this.http.post(this.url + "favorites", new Favorites(name), {observe:'response', withCredentials: true})
     
 
   }

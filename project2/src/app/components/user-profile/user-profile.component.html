@@ -1,2 +1,37 @@
-<p>user-profile works!</p>
-<app-favorites></app-favorites>
+<div class="container">
+    <header class="header">
+      <p>Profile Info:</p>
+      <p>Username: {{user.body.username}}</p>
+      <span>Name: {{user.body.firstName}} {{user.body.lastName}}</span>
+    </header>
+  
+    <!-- Replace <div> with <aside> if your content has one aside. For more than one, nest <aside> elements in the <div>. -->
+    <div>
+      <p>Groups:</p>
+    </div>
+  
+    <main class="content">
+      <p><app-favorites></app-favorites></p>
+    </main>
+  
+ 
+    <div>
+      <p>Favorites:</p>
+      <!-- <p>{{user.body.favs[0].imdbId}}</p>
+      <p>{{user.body.favs[1].imdbId}}</p>
+      <p>{{user.body.favs[2].imdbId}}</p>
+      <p>{{user.body.favs[3].imdbId}}</p>
+      <p>{{user.body.favs[4].imdbId}}</p>
+      <p>{{user.body.favs[5].imdbId}}</p>
+      <p>{{user.body.favs[6].imdbId}}</p>
+      <p>{{user.body.favs[7].imdbId}}</p>
+      <p>{{user.body.favs[8].imdbId}}</p>
+      <p>{{user.body.favs[9].imdbId}}</p> -->
+    </div>
+  
+    <!-- <footer class="footer">
+      <p>footer</p>
+    </footer> -->
+  </div>
+  
+<router-outlet></router-outlet>

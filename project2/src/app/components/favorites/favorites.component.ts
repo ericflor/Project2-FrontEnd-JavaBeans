@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Favorites } from 'src/app/models/favorites';
+import { User } from 'src/app/models/user';
 import { FavoritesService } from 'src/app/services/favorites.service';
 import { environment } from 'src/environments/environment';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Component({
@@ -15,8 +17,9 @@ export class FavoritesComponent implements OnInit {
   url:string = "https://imdb-api.com/en/API/SearchMovie/k_06em724z/";
   movie: any;
   searchName: string = '';
+  user:User = new User();
 
-  constructor(private favoriteService:FavoritesService, private http:HttpClient) { }
+  constructor(private favoriteService:FavoritesService, private http:HttpClient, private cookieService: CookieService) { }
 
   ngOnInit(): void {
     
@@ -36,18 +39,14 @@ export class FavoritesComponent implements OnInit {
   }
 
   addFav1(){
-    // console.log(this.movie.results[0].title);
-    // this.http.post(environment.serverURL + "favorites", {"imdbId":this.movie.results[0].title} , 
-    //   {withCredentials: true}
-    // ).subscribe(next:()=>{}, error:);
-    // )
-
-    // console.log("after? post")
     
     this.favoriteService.postFavs(this.movie.results[0].title).subscribe({
-      next:()=>{
+      next:(response)=>{
         console.log("added a new fav!");
         console.log(this.movie.results[0].title);
+        this.cookieService.set("upNext_user", JSON.stringify(response));
+        this.user = JSON.parse(this.cookieService.get("upNext_user"));
+        console.log(this.cookieService.get("upNext_user"));
         
       },
       error:()=>{console.log("something went wrong faving your movie: " + this.movie.results[0].title)}
@@ -57,9 +56,12 @@ export class FavoritesComponent implements OnInit {
   addFav2(){
     
     this.favoriteService.postFavs(this.movie.results[1].title).subscribe({
-      next:()=>{
+      next:(response)=>{
         console.log("added a new fav!");
         console.log(this.movie.results[1].title);
+        this.cookieService.set("upNext_user", JSON.stringify(response));
+        this.user = JSON.parse(this.cookieService.get("upNext_user"));
+        console.log(this.cookieService.get("upNext_user"));
         
       },
       error:()=>{console.log("something went wrong faving your movie: " + this.movie.results[1].title)}
@@ -69,9 +71,12 @@ export class FavoritesComponent implements OnInit {
   addFav3(){
     
     this.favoriteService.postFavs(this.movie.results[2].title).subscribe({
-      next:()=>{
+      next:(response)=>{
         console.log("added a new fav!");
         console.log(this.movie.results[2].title);
+        this.cookieService.set("upNext_user", JSON.stringify(response));
+        this.user = JSON.parse(this.cookieService.get("upNext_user"));
+        console.log(this.cookieService.get("upNext_user"));
         
       },
       error:()=>{console.log("something went wrong faving your movie: " + this.movie.results[2].title)}

@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Favorites } from 'src/app/models/favorites';
 import { FavoritesService } from 'src/app/services/favorites.service';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -34,6 +36,13 @@ export class FavoritesComponent implements OnInit {
   }
 
   addFav1(){
+    // console.log(this.movie.results[0].title);
+    // this.http.post(environment.serverURL + "favorites", {"imdbId":this.movie.results[0].title} , 
+    //   {withCredentials: true}
+    // ).subscribe(next:()=>{}, error:);
+    // )
+
+    // console.log("after? post")
     
     this.favoriteService.postFavs(this.movie.results[0].title).subscribe({
       next:()=>{

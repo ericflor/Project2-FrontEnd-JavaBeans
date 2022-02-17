@@ -134,32 +134,32 @@ export class DecisionsComponent implements OnInit {
     }
   }
 
-  addLiked(){
-    this.decisionsService.postLiked(this.likedArray).subscribe({
-      next:()=>{
-        console.log("added liked movies");
-        console.log(this.likedArray);
+  // addLiked(){
+  //   this.decisionsService.postLiked(this.likedArray).subscribe({
+  //     next:()=>{
+  //       console.log("added liked movies");
+  //       console.log(this.likedArray);
         
-      },
-      error: () =>{console.log("something went wrong recording your liked movies.");
-      }
-    })
-  }
+  //     },
+  //     error: () =>{console.log("something went wrong recording your liked movies.");
+  //     }
+  //   })
+  // }
 
-   addToFavorites(Movie:any){
-    this.favoritesArray = new Array();
-    if(this.tenMovies.length>0){
-      let favBtn: any = document.getElementById("favBtn");
-      favBtn.addEventListener("click", () =>{
+  //  addToFavorites(Movie:any){
+  //   this.favoritesArray = new Array();
+  //   if(this.tenMovies.length>0){
+  //     let favBtn: any = document.getElementById("favBtn");
+  //     favBtn.addEventListener("click", () =>{
 
-      this.favoritesArray = [];
-      let currentMovie = this.oneMovieArray[0].title;
-      let favoriteMovie = this.favoritesArray.push(currentMovie);
-        console.log(favoriteMovie);
-        console.log(this.favoritesArray);
+  //     this.favoritesArray = [];
+  //     let currentMovie = this.oneMovieArray[0].title;
+  //     let favoriteMovie = this.favoritesArray.push(currentMovie);
+  //       console.log(favoriteMovie);
+  //       console.log(this.favoritesArray);
 
-    })
-    }
+  //   })
+  //   }
 
-  }
+  // }
 }

@@ -96,7 +96,7 @@ export class DecisionsComponent implements OnInit {
       likeBtn.addEventListener("click", () => {
 
        this.decisions = { //create new decisions object when deciding for each movie
-        id: 0,
+        id: 1,
         roundId: this.newRound,
         imdbId: this.tenMovies[0].id,
         title: this.tenMovies[0].title,
@@ -105,14 +105,24 @@ export class DecisionsComponent implements OnInit {
        }
       // postLiked() {
       //   let decisions = new Decisions(0, 0,"","",true, 0)
-      //   this.ps.postLiked(decisions).subscribe(
+      //   this.postLiked(decisions).subscribe(
       //     (response: Decisions) => {
       //       this.decisions = response;
       //     }
       //   )
       // }
         this.decisions.choice = true
-        this.decisionsService.postLiked(this.decisions)
+        // this.decisionsService.postLiked(this.decisions).subscribe({
+        //   next:()=>{
+        //     console.log("added like to db");
+        //     console.log(this.decisions);
+            
+            
+        //   },
+        //   error:()=>{console.log("something went wrong");}
+        // });
+
+        
         // Empties one movie array to make it easier to just append the first index of this array each time in html
         this.oneMovieArray = [];
 
@@ -128,11 +138,12 @@ export class DecisionsComponent implements OnInit {
         // Takes the shifted movie and puts it into a seperate array we call in the html to append it to the page.
         let appendedMovie = this.oneMovieArray.push(oneMovie);
         console.log(this.decisions)
-        return true;
+        // return true;
+        this.addLiked()
       })
       dislikeBtn.addEventListener("click", () => {
          this.decisions = {
-        id: 0,
+        id: 1,
         roundId: this.newRound,
         imdbId: this.tenMovies[0].id,
         title: this.tenMovies[0].title,
@@ -161,5 +172,15 @@ export class DecisionsComponent implements OnInit {
       })
     }
   }
-
+addLiked(){
+  this.decisionsService.postLiked(this.decisions).subscribe({
+    next:()=>{
+      console.log("added like to db");
+      console.log(this.decisions);
+      
+      
+    },
+    error:()=>{console.log("something went wrong");}
+  });
+}
 }

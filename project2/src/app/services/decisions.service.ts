@@ -11,7 +11,7 @@ import { Decisions } from '../models/decisions';
 export class DecisionsService {
 
   url: string = environment.serverURL;
-  apiURL: string = "https://imdb-api.com/en/API/Top250Movies/k_06em724z/"
+  apiURL: string = "https://imdb-api.com/en/API/Top250Movies/k_19lmdqtz"
   constructor(private http:HttpClient) { }
 
   getMovies(){
@@ -24,12 +24,13 @@ export class DecisionsService {
   //   console.log(body);
     
   //   return this.http.post<Decisions>(this.url + "decisions", body);
+  // }
   //   // return this.http.post(this.url + "decisions", decisions, {withCredentials: true});
   // }
   postLiked(decisions:Decisions){
 
     console.log(decisions)
-    return this.http.post(this.url + "decisions", decisions, {withCredentials: true});
+    return this.http.post(this.url + "decisions", new Decisions(0, 1, "", "", true, 1), {withCredentials: true});
 
   }
 }

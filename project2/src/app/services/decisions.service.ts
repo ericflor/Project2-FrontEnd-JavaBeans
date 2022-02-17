@@ -20,7 +20,7 @@ export class DecisionsService {
 
   postLiked(imdbId:string){
 
-    return this.http.post(this.url + "decisions", new Decisions(0, 1, imdbId, true, 1));
+    return this.http.post(this.url + "decisions", new Decisions(0, 1, imdbId, "", true, 1));
 
   }
 }

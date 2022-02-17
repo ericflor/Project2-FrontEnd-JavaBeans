@@ -24,8 +24,16 @@ export class DecisionsComponent implements OnInit {
   favoritesArray: any = [];
   oneMovieArray: any = [];
   url: string = "https://imdb-api.com/en/API/Top250Movies/k_06em724z/";
-
-
+  visible: boolean = false;
+  newRound: number = 0;
+  decisions: Decisions = {
+    id: 0,
+    roundId: this.newRound,
+    imdbId: "",
+    movieTitle: "",
+    choice: false,
+    userId: 0
+  }
 
   constructor(private decisionsService: DecisionsService, private http: HttpClient) { }
 
@@ -36,6 +44,8 @@ export class DecisionsComponent implements OnInit {
 
   // populate with array of ten movie objects from Response body of API call to imdbapi 
   getMovies(movieArray: any[]) {
+    this.visible = true
+    //let btn = document.getElementById("movitBtn").style.display = "none"
     this.movieArray = movieArray;
 
    // this.http.get(this.url).subscribe(data => {
@@ -44,6 +54,7 @@ export class DecisionsComponent implements OnInit {
 
       this.items = this.movieArray["items"] // returns items key in movieArray object
 
+      this.newRound = this.decisions.roundId++
       //console.log(items)
       this.randomizeList(this.items)
     })
@@ -88,78 +99,63 @@ export class DecisionsComponent implements OnInit {
       let likeBtn: any = document.getElementById("likeBtn");
       let dislikeBtn: any = document.getElementById("dislikeBtn");
 
-      let Decisions = {
-        id: this.tenMovies[0].id,
-        name: this.tenMovies[0].title,
-        liked:false
-      }
-      console.log(Decisions)
+     
+      //console.log(Decisions)
 
       likeBtn.addEventListener("click", () => {
-        Decisions.liked = true
-        console.log(Decisions)
-      // // let movieIds = this.tenMovies[i].id
-      
+       this.decisions = {
+        id: 0,
+        roundId: this.newRound,
+        imdbId: this.tenMovies[0].id,
+        movieTitle: this.tenMovies[0].title,
+        choice: false,
+        userId:0
+       }
+        this.decisions.choice = true
         // Empties one movie array to make it easier to just append the first index of this array each time in html
         this.oneMovieArray = [];
 
         // takes first index in tenmovies array, takes it out of the array and returns it
         let oneMovie = this.tenMovies.shift();
-        
+        if (this.tenMovies.length == 0) {
+          this.visible = false
+        }
         // grab that movie in the first index that was shifted out and put it into a liked movies array to hold it
         let nextMovie = this.likedArray.push(oneMovie);
        
         // Takes the shifted movie and puts it into a seperate array we call in the html to append it to the page.
         let appendedMovie = this.oneMovieArray.push(oneMovie);
-      //   console.log(this.oneMovieArray);
-        
+        console.log(this.decisions)
         return true;
       })
       dislikeBtn.addEventListener("click", () => {
-
+         this.decisions = {
+        id: 0,
+        roundId: this.newRound,
+        imdbId: this.tenMovies[0].id,
+        movieTitle: this.tenMovies[0].title,
+        choice: false,
+        userId:0
+      }
+        this.decisions.choice = false
          // Empties one movie array to make it easier to just append the first index of this array each time in html
         this.oneMovieArray = [];
 
         // takes first index in tenmovies array, takes it out of the array and returns it
         let oneMovie = this.tenMovies.shift();
-
+         if (this.tenMovies.length == 0) {
+          this.visible = false
+        }
          // grab that movie in the first index that was shifted out and put it into a disliked movies array to hold it
         let nextMovie = this.dislikedArray.push(oneMovie);
 
         // Takes the shifted movie and puts it into a seperate array we call in the html to append it to the page.
         let appendedMovie = this.oneMovieArray.push(oneMovie);
 
+        console.log(this.decisions)
         return false;
       })
     }
   }
 
-  // addLiked(){
-  //   this.decisionsService.postLiked(this.likedArray).subscribe({
-  //     next:()=>{
-  //       console.log("added liked movies");
-  //       console.log(this.likedArray);
-        
-  //     },
-  //     error: () =>{console.log("something went wrong recording your liked movies.");
-  //     }
-  //   })
-  // }
-
-  //  addToFavorites(Movie:any){
-  //   this.favoritesArray = new Array();
-  //   if(this.tenMovies.length>0){
-  //     let favBtn: any = document.getElementById("favBtn");
-  //     favBtn.addEventListener("click", () =>{
-
-  //     this.favoritesArray = [];
-  //     let currentMovie = this.oneMovieArray[0].title;
-  //     let favoriteMovie = this.favoritesArray.push(currentMovie);
-  //       console.log(favoriteMovie);
-  //       console.log(this.favoritesArray);
-
-  //   })
-  //   }
-
-  // }
 }

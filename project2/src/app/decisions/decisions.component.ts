@@ -48,7 +48,7 @@ export class DecisionsComponent implements OnInit {
 
       // Hide get movies button after clicked
       let getMoviesBtn:any = document.getElementById("getMoviesBtn");
-      getMoviesBtn.isvisible=false;
+      getMoviesBtn.hidden=false;
 
     })
   }
@@ -142,20 +142,20 @@ export class DecisionsComponent implements OnInit {
 
   
 
-   addToFavorites(Movie:any){
-    this.favoritesArray = new Array();
-    if(this.tenMovies.length>0){
-      let favBtn: any = document.getElementById("favBtn");
-      favBtn.addEventListener("click", () =>{
+  //  addToFavorites(Movie:any){
+  //   this.favoritesArray = new Array();
+  //   if(this.tenMovies.length>0){
+  //     let favBtn: any = document.getElementById("favBtn");
+  //     favBtn.addEventListener("click", () =>{
 
-      this.favoritesArray = [];
-      let currentMovie = this.oneMovieArray[0].title;
-      let favoriteMovie = this.favoritesArray.push(currentMovie);
-        console.log(favoriteMovie);
-        console.log(this.favoritesArray);
+  //     this.favoritesArray = [];
+  //     let currentMovie = this.oneMovieArray[0].title;
+  //     let favoriteMovie = this.favoritesArray.push(currentMovie);
+  //       console.log(favoriteMovie);
+  //       console.log(this.favoritesArray);
 
-    })
-    }
+  //   })
+  //   }
 
-  }
+  // }
 }

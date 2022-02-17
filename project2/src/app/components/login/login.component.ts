@@ -16,7 +16,8 @@ export class LoginComponent implements OnInit {
   username: String = '';
   password: String = '';
   url: String = environment.serverURL;
-  user:User = new User(0, "", "", "", new Group(0, "", true),0, "", Array<Favorites>(new Favorites("")));
+  user:User = new User("", "", "", "", "",0);
+  show:boolean =false;
 
 
   constructor(private cookieService: CookieService, private httpClient:HttpClient) { }
@@ -38,6 +39,15 @@ export class LoginComponent implements OnInit {
     console.log("nada");
     
 
+  }
+
+  signup(){
+    console.log("clicked sign up");
+    console.log(this.user);
+    this.httpClient.post(this.url + "user", this.user, {observe:'response', withCredentials:true}).subscribe({
+      next: response=>{this.show = true; console.log(response)},
+      error: response=>{console.log("Error "+response)}
+    });
   }
 
 }

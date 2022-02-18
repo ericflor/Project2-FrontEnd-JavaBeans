@@ -6,6 +6,8 @@ import { FavoritesService } from 'src/app/services/favorites.service';
 import { environment } from 'src/environments/environment';
 import { CookieService } from 'ngx-cookie-service';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
+import { SharedService } from 'src/app/event-emitter.service';
+
 
 
 @Component({
@@ -29,7 +31,7 @@ export class FavoritesComponent implements OnInit {
   user:User = new User();
   
 
-  constructor(private favoriteService:FavoritesService, private http:HttpClient, private cookieService: CookieService) { }
+  constructor(private sharedService:SharedService, private favoriteService:FavoritesService, private http:HttpClient, private cookieService: CookieService) { }
 
   ngOnInit(): void {
     
@@ -37,9 +39,9 @@ export class FavoritesComponent implements OnInit {
   }
 
   sendFavs(){
-    this.userProfile?.populateFavs();
-    this.userTry.populateFavs;
-    console.log("send favs called");
+    
+    this.sharedService.sendClickEvent();
+    console.log("sending fav!")
   }
 
   
@@ -64,6 +66,8 @@ export class FavoritesComponent implements OnInit {
         this.cookieService.set("upNext_user", JSON.stringify(response.body));
         this.user = JSON.parse(this.cookieService.get("upNext_user"));
         console.log(this.user);
+        this.sharedService.sendClickEvent();
+        console.log("sending fav!")
         
       },
       error:()=>{console.log("something went wrong faving your movie: " + this.movie.results[0].title)}

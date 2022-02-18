@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { Subscription } from 'rxjs/internal/Subscription';
+import { SharedService } from 'src/app/event-emitter.service';
 import { FavoritesService } from 'src/app/services/favorites.service';
 import { environment } from 'src/environments/environment';
 
@@ -31,8 +33,11 @@ export class UserProfileComponent implements OnInit {
   firstName:any;
   lastName:any;
   email:any;
+  clickEventSubscription:Subscription | undefined;
 
-  constructor(private router: Router, private cookieService: CookieService, private http:HttpClient, private favorite:FavoritesService) { }
+  constructor(private sharedService:SharedService, private router: Router, private cookieService: CookieService, private http:HttpClient, private favorite:FavoritesService) { 
+    
+  }
 
   ngOnInit(): void {
 
@@ -51,17 +56,20 @@ export class UserProfileComponent implements OnInit {
       error:()=>{
         console.log("here")
         this.router.navigate([`login`]);
-      },
-      complete: ()=>{
-        
       }
     })
+
+    this.clickEventSubscription = this.sharedService.getClickEvent().subscribe(()=>{
+      this.populateFavs();
+    })
+
   }
 
   populateFavs(){
     
+    
     this.user = JSON.parse(this.cookieService.get("upNext_user"));
-    console.log("In Populate");
+    console.log("In Populate Favs Function!");
     this.movie1 = this.user.favs[0].imdbId;
     this.movie2 = this.user.favs[1].imdbId;
     this.movie3 = this.user.favs[2].imdbId;

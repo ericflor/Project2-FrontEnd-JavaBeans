@@ -38,7 +38,7 @@ export class FavoritesComponent implements OnInit {
 
   sendFavs(){
     this.userProfile?.populateFavs();
-    this.userTry.populateFavs();
+    this.userTry.populateFavs;
     console.log("send favs called");
   }
 

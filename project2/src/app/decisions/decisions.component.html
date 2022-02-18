@@ -1,11 +1,12 @@
 <!-- Create modal with pic of movie, its synopsis, and add buttons for liked, disliked, and favorited. Add logic to add favorited movies into favorites component -->
-<button type="button" class="btn btn-success my-3" [hidden]="visible" id="movitBtn" (click)="getMovies(movieArray)">Get Movies</button>
+<div class=" bg-info vh-100 mw-100">
+<button type="button" class="btn btn-success my-3 ml-3" [hidden]="visible" id="movitBtn" (click)="getMovies(movieArray)">Get Movies</button>
 <div class="d-flex justify-content-center">
-<div class="card text-center bg-dark border border-dark w-75" >
+<div class="card text-center bg-dark border border-dark w-75 mt-3" >
 
     <img [src]=
     "tenMovies[0].image" 
-     class="card-img-top" style=" display: block; margin-left: auto; margin-right: auto;width: 40%; min-width: 100px; min-height: 200px;" 
+     class="card-img-top" style=" display: block; margin-left: auto; margin-right: auto;width: 40%; min-width: 100px; min-height: 200px; max-height: 450px;" 
      alt="movie poster">
 
     <div class="card-body bg-light border border-dark" >
@@ -18,4 +19,5 @@
       <button type="button" id="dislikeBtn" class="btn btn-danger mx-3 border border-dark" >Dislike</button>
     </div>
     </div>
-  
+</div>
+</div>

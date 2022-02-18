@@ -18,22 +18,11 @@ export class DecisionsService {
 
     return this.http.get<Decisions>(this.apiURL + 'Top250Movies/k_19lmdqtz/');
     //k_19lmdqtz
-
     //k_06em724z
   }
 
-  // postLiked(decisions:Decisions):Observable<Decisions>{
-  //   let body:Decisions=decisions;
-  //   console.log(body);
-    
-  //   return this.http.post<Decisions>(this.url + "decisions", body);
-  // }
-  //   // return this.http.post(this.url + "decisions", decisions, {withCredentials: true});
-  // }
   postLiked(decisions:Decisions){
-
     console.log(decisions)
-    return this.http.post(this.url + "decisions", decisions, {withCredentials: true});
-
+    return this.http.post(this.url + "decisions", decisions, {withCredentials: true}); 
   }
 }

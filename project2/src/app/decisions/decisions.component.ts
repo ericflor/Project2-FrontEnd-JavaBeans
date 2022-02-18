@@ -57,8 +57,8 @@ export class DecisionsComponent implements OnInit {
       this.randomizeList(this.items)
 
       // Hide get movies button after clicked
-      let getMoviesBtn:any = document.getElementById("getMoviesBtn");
-      getMoviesBtn.hidden=false;
+      // let getMoviesBtn:any = document.getElementById("getMoviesBtn");
+      // getMoviesBtn.hidden=false;
 
     })
   }
@@ -104,26 +104,8 @@ export class DecisionsComponent implements OnInit {
         choice: false,
         userId:0
        }
-      // postLiked() {
-      //   let decisions = new Decisions(0, 0,"","",true, 0)
-      //   this.postLiked(decisions).subscribe(
-      //     (response: Decisions) => {
-      //       this.decisions = response;
-      //     }
-      //   )
-      // }
-        this.decisions.choice = true
-        // this.decisionsService.postLiked(this.decisions).subscribe({
-        //   next:()=>{
-        //     console.log("added like to db");
-        //     console.log(this.decisions);
-            
-            
-        //   },
-        //   error:()=>{console.log("something went wrong");}
-        // });
-
-        
+     
+        this.decisions.choice = true        
         // Empties one movie array to make it easier to just append the first index of this array each time in html
         this.oneMovieArray = [];
 
@@ -139,7 +121,6 @@ export class DecisionsComponent implements OnInit {
         // Takes the shifted movie and puts it into a seperate array we call in the html to append it to the page.
         let appendedMovie = this.oneMovieArray.push(oneMovie);
         console.log(this.decisions)
-        // return true;
         this.addLiked()
       })
       dislikeBtn.addEventListener("click", () => {
@@ -152,7 +133,6 @@ export class DecisionsComponent implements OnInit {
         userId:0
       }
         this.decisions.choice = false
-        this.decisionsService.postLiked(this.decisions)
          // Empties one movie array to make it easier to just append the first index of this array each time in html
         this.oneMovieArray = [];
 
@@ -177,9 +157,7 @@ addLiked(){
   this.decisionsService.postLiked(this.decisions).subscribe({
     next:()=>{
       console.log("added like to db");
-      console.log(this.decisions);
-      
-      
+      console.log(this.decisions);    
     },
     error:()=>{console.log("something went wrong");}
   });

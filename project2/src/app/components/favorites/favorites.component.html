@@ -1,8 +1,9 @@
-<br>
-<p>Type in a movie you want to see!</p>
 
-<input type="text" [(ngModel)]="searchName">
-<button type="button" class="btn btn-success" (click)="searchFavs(searchName)">Search</button>
+<p class="d-flex justify-content-center">Type in a movie you want to see!</p>
+<div class="d-flex justify-content-center">
+    <input type="text" [(ngModel)]="searchName">
+    <button type="button" class="btn btn-success" (click)="searchFavs(searchName)">Search</button>
+</div>
 <br>
 <br>
 <table *ngIf="movie" class="table">

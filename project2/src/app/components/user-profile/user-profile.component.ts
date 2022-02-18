@@ -29,6 +29,8 @@ export class UserProfileComponent implements OnInit {
   movie5:any;
   movie6:any;
   movie7:any;
+  movie8:any;
+  movie9:any;
   username:any;
   firstName:any;
   lastName:any;
@@ -52,6 +54,8 @@ export class UserProfileComponent implements OnInit {
         this.movie5 = this.user.favs[4].imdbId;
         this.movie6 = this.user.favs[5].imdbId;
         this.movie7 = this.user.favs[6].imdbId;
+        this.movie8 = this.user.favs[7].imdbId;
+        this.movie9 = this.user.favs[8].imdbId;
       },
       error:()=>{
         console.log("here")
@@ -77,6 +81,8 @@ export class UserProfileComponent implements OnInit {
     this.movie5 = this.user.favs[4].imdbId;
     this.movie6 = this.user.favs[5].imdbId;
     this.movie7 = this.user.favs[6].imdbId;
+    this.movie8 = this.user.favs[7].imdbId;
+    this.movie9 = this.user.favs[8].imdbId;
   }
 
 

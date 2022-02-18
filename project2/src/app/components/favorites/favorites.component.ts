@@ -67,7 +67,7 @@ export class FavoritesComponent implements OnInit {
         this.user = JSON.parse(this.cookieService.get("upNext_user"));
         console.log(this.user);
         this.sharedService.sendClickEvent();
-        console.log("sending fav!")
+        console.log("sending fav!");
         
       },
       error:()=>{console.log("something went wrong faving your movie: " + this.movie.results[0].title)}
@@ -83,6 +83,8 @@ export class FavoritesComponent implements OnInit {
         this.cookieService.set("upNext_user", JSON.stringify(response.body));
         this.user = JSON.parse(this.cookieService.get("upNext_user"));
         console.log(this.user);
+        this.sharedService.sendClickEvent();
+        console.log("sending fav!");
         
       },
       error:()=>{console.log("something went wrong faving your movie: " + this.movie.results[1].title)}
@@ -98,6 +100,8 @@ export class FavoritesComponent implements OnInit {
         this.cookieService.set("upNext_user", JSON.stringify(response.body));
         this.user = JSON.parse(this.cookieService.get("upNext_user"));
         console.log(this.user);
+        this.sharedService.sendClickEvent();
+        console.log("sending fav!");
         
       },
       error:()=>{console.log("something went wrong faving your movie: " + this.movie.results[2].title)}

@@ -18,13 +18,12 @@ export class DecisionsComponent implements OnInit {
   movieArray: any = []; // randomize which indices from response we receive 
   items: any;
   tenMovies: any;
+ // poster: any = "./imgs/project2-user-flow.jpg";
   movieTitleArray: any;
   likedArray: any = [];
   dislikedArray: any =[];
   favoritesArray: any = [];
   oneMovieArray: any = [];
-  url: string = "https://imdb-api.com/en/API/Top250Movies/k_06em724z/";
-  // decisionBtn: boolean = true;
   visible: boolean = false;
   newRound: number = 0;
   decisions: Decisions = {
@@ -42,7 +41,9 @@ export class DecisionsComponent implements OnInit {
 
   }
 
-
+  stockImg() {
+    let pic = "imgs/stock_movie.jpg" 
+  }
   // populate with array of ten movie objects from Response body of API call to imdbapi 
   getMovies(movieArray: any[]) {
     this.visible = true   //make button disappear when clicked

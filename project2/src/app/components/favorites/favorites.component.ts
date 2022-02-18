@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Favorites } from 'src/app/models/favorites';
 import { User } from 'src/app/models/user';
 import { FavoritesService } from 'src/app/services/favorites.service';
 import { environment } from 'src/environments/environment';
 import { CookieService } from 'ngx-cookie-service';
+import { UserProfileComponent } from '../user-profile/user-profile.component';
 
 
 @Component({
@@ -12,7 +13,15 @@ import { CookieService } from 'ngx-cookie-service';
   templateUrl: './favorites.component.html',
   styleUrls: ['./favorites.component.css']
 })
+
+
+
 export class FavoritesComponent implements OnInit {
+
+  @Input()
+  userProfile: UserProfileComponent | undefined;
+
+  userTry:any = UserProfileComponent;
 
   url:string = "https://imdb-api.com/en/API/SearchMovie/k_19lmdqtz/";
   movie: any;
@@ -25,8 +34,15 @@ export class FavoritesComponent implements OnInit {
   ngOnInit(): void {
     
     
-    
   }
+
+  sendFavs(){
+    this.userProfile?.populateFavs();
+    this.userTry.populateFavs();
+    console.log("send favs called");
+  }
+
+  
 
   searchFavs(search:string){
 

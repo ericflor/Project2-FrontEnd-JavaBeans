@@ -1,4 +1,4 @@
-
+<!-- <app-favorites [userProfile]="userProfile"></app-favorites> -->
 <p class="d-flex justify-content-center" style="color:black">Type in a movie you want to see!</p>
 <div class="d-flex justify-content-center">
     <input type="text" [(ngModel)]="searchName">
@@ -17,7 +17,7 @@
         <td>{{movie.results[0].title}}</td>
         <td>{{movie.results[0].description}}</td>
         <td><img src="{{movie.results[0].image}}" width="170" height="150"></td>
-        <td><button class="btn btn-primary" (click)="addFav1()">Save</button></td>
+        <td><button class="btn btn-primary" (click)="addFav1()" (click)="sendFavs()">Save</button></td>
     </tr>
     <tr>
         <td id="movieName">{{movie.results[1].title}}</td>

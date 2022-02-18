@@ -2,18 +2,18 @@
     margin-bottom: 10px;
   }
   
-  /* grid for wider viewports. */
+
   @media screen and (min-width: 40em) {
     .container > * {
       margin-bottom: 0;
     }
-    /* Define the grid */
+  
     .container {
       display: grid;
       grid-template-columns: 1fr 3fr 1fr;
       grid-gap: 10px 20px;
     }
-    /* Place items on the grid */
+
     .header,
     .footer {
       grid-column: 1 / -1;

@@ -22,7 +22,7 @@ export class FavoritesComponent implements OnInit {
   constructor(private favoriteService:FavoritesService, private http:HttpClient, private cookieService: CookieService) { }
 
   ngOnInit(): void {
-    
+      
     
     
   }

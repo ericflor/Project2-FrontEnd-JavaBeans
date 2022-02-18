@@ -5,6 +5,7 @@ import { Favorites } from 'src/app/models/favorites';
 import { Group } from 'src/app/models/group';
 import { User } from 'src/app/models/user';
 import { environment } from 'src/environments/environment';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -18,9 +19,11 @@ export class LoginComponent implements OnInit {
   url: String = environment.serverURL;
   user:User = new User();
   show:boolean =false;
+  show2:boolean = false;
+  loginUser:any;
 
 
-  constructor(private cookieService: CookieService, private httpClient:HttpClient) { }
+  constructor(private router: Router, private route: ActivatedRoute, private cookieService: CookieService, private httpClient:HttpClient) { }
 
   ngOnInit(): void {
   }
@@ -29,18 +32,22 @@ export class LoginComponent implements OnInit {
     this.httpClient.post<User>(this.url + "login", {"username":this.username, "password":this.password}, {observe:'response', withCredentials:true}).subscribe({
       next:(data:any)=>{
         this.user = data.body;
-        if(this.user.group==null){
-          this.user.group=new Group();
-        }
-        this.cookieService.set("upNext_user", JSON.stringify(data.body));
-        console.log(this.cookieService.get("upNext_user"));
-        console.log(this.user)},
-      error:()=>{console.log("nope")},
-      complete: ()=>{console.log(this.cookieService.get("upNext_user"));}
-    });
-    console.log("login");
     
+        if(this.user != null){ 
+          console.log("logged in!");
+          this.router.navigate(['user']); // if login succesful, route to user-profile page
+        }
 
+        this.cookieService.set("upNext_user", JSON.stringify(data.body));
+        //console.log(this.cookieService.get("upNext_user"));
+        //console.log(this.user)
+      },
+      error:()=>{this.show2 = true; console.log("Invalid Credentials")},
+      complete: ()=>{
+        //JSON.parse(this.cookieService.get("upNext_user"));
+        //console.log(JSON.parse(this.cookieService.get("upNext_user")));
+      }
+    });
   }
 
   signup(){

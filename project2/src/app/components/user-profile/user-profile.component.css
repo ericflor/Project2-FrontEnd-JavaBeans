@@ -17,6 +17,7 @@
     .header,
     .footer {
       grid-column: 1 / -1;
+      
     }
     .content {
       grid-column: 2 / 3;
@@ -24,7 +25,7 @@
   }
 
   .container {
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: Helvetica, Arial, sans-serif;
     margin-left: auto;
     margin-right: auto;
     max-width: 75rem;
@@ -34,10 +35,10 @@
     /* background-color: #5B9BD5; */
     background-color: #00B0F0;
     padding: 1em;
-    box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, .19)
   }
   
 
   .content {
     min-height: 350px;
+    font: 600 16px/18px 'Open Sans', sans-serif;
   }

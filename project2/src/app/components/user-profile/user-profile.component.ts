@@ -2,10 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { User } from 'src/app/models/user';
 import { FavoritesService } from 'src/app/services/favorites.service';
 import { environment } from 'src/environments/environment';
-import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-user-profile',
@@ -33,15 +31,27 @@ export class UserProfileComponent implements OnInit {
   ngOnInit(): void {
 
     this.http.get(this.url + "user/current", {withCredentials: true}).subscribe({
-      
+      next: ()=>{
+        this.user = JSON.parse(this.cookieService.get("upNext_user"));
+        console.log("In Next");
+        this.movie1 = this.user.favs[0].imdbId;
+        this.movie2 = this.user.favs[1].imdbId;
+        this.movie3 = this.user.favs[2].imdbId;
+        this.movie4 = this.user.favs[3].imdbId;
+        this.movie5 = this.user.favs[4].imdbId;
+        this.movie6 = this.user.favs[5].imdbId;
+        this.movie7 = this.user.favs[6].imdbId;
+      },
       error:()=>{
         console.log("here")
         this.router.navigate([`login`]);
+      },
+      complete: ()=>{
+        
       }
     })
 
-    this.user = JSON.parse(this.cookieService.get("upNext_user"));
-    console.log(this.user);
+    
     
 
     // for(var i = 0; i < this.user.favs.length; i++){
@@ -50,13 +60,7 @@ export class UserProfileComponent implements OnInit {
 
     // }
 
-    this.movie1 = this.user.favs[0].imdbId;
-    this.movie2 = this.user.favs[1].imdbId;
-    this.movie3 = this.user.favs[2].imdbId;
-    this.movie4 = this.user.favs[3].imdbId;
-    this.movie5 = this.user.favs[4].imdbId;
-    this.movie6 = this.user.favs[5].imdbId;
-    this.movie7 = this.user.favs[6].imdbId;
+    
 
   }
 

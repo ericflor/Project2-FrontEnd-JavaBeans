@@ -1,10 +1,11 @@
 <!-- Create modal with pic of movie, its synopsis, and add buttons for liked, disliked, and favorited. Add logic to add favorited movies into favorites component -->
-<div class=" bg-info vh-100 mw-100">
+<app-navbar></app-navbar>
+<div class="vh-100 mw-100" style="background-image: linear-gradient(to right, #00B0F0, #5B9BD5);">
 <button type="button" class="btn btn-success my-3 ml-3" [hidden]="visible" id="movitBtn" (click)="getMovies(movieArray)">Get Movies</button>
 <div class="d-flex justify-content-center">
-<div class="card text-center bg-dark border border-dark w-75 mt-3" >
+<div class="card text-center bg-dark border border-dark w-75 mt-3 rounded" style=" box-shadow: 0 20px 20px 0 rgba(0, 0, 0, 0.50), 0 17px 50px 0 rgba(0, 0, 0, .50)" >
 <!--   
-<app-navbar></app-navbar>
+
 <button type="button" class="btn btn-success" [hidden]="visible" id="movitBtn" (click)="getMovies(movieArray)">Get Movies</button>
 <div class="card text-center" > -->
 

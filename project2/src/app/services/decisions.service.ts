@@ -22,7 +22,17 @@ export class DecisionsService {
   }
 
   postLiked(decisions:Decisions){
-    console.log(decisions)
-    return this.http.post(this.url + "decisions", decisions, {withCredentials: true}); 
+
+    return this.http.post(this.url + "decisions", decisions, {withCredentials: true});
+  }
+
+  getRoundMovies(round:number){
+
+    return this.http.get<string[]>(this.url + "decisions/round/"+ round, {withCredentials: true}); 
+
+  }
+
+  getOneMovie(movie:string){
+    return this.http.get(environment.apiURL + "title/k_19lmdqtz/"+ movie)
   }
 }

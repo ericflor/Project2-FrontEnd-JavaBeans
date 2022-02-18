@@ -37,6 +37,7 @@ export class DecisionsComponent implements OnInit {
     choice: false,
     userId: 0
   }
+  user: User = new User()
 
   constructor(private router: Router, private decisionsService: DecisionsService, private http: HttpClient) { }
 
@@ -47,6 +48,7 @@ export class DecisionsComponent implements OnInit {
         if(response.group==null){
           this.router.navigate([`user`]);
         }
+        this.user=response
       },
       error:()=>{
         console.log("here")
@@ -65,18 +67,31 @@ export class DecisionsComponent implements OnInit {
     // this.decisionBtn = false
     this.movieArray = movieArray;
       // this.http.get(this.url).subscribe(data => {
-      this.decisionsService.getMovies().subscribe(data => {
-      this.movieArray = data;
-      this.decisions.roundId = this.newRound++ //increment round everytime new list is called
-
-      this.items = this.movieArray["items"] // returns items key in movieArray object
-      this.randomizeList(this.items)
+        if(this.user.roleId==2){
+          this.decisionsService.getMovies().subscribe(data => {
+            this.movieArray = data;
+            this.decisions.roundId = this.newRound++ //increment round everytime new list is called
+      
+            this.items = this.movieArray["items"] // returns items key in movieArray object
+            this.randomizeList(this.items);
+        }
+          )}else{
+            this.decisionsService.getRoundMovies(this.newRound++).subscribe(data =>{
+              
+              for(let i=0; i>data.length; i++){
+                this.decisionsService.getOneMovie(data[i]).subscribe(data =>{
+                  this.movieArray.push(data)
+                })
+              }
+            })
+          }
+    
 
       // Hide get movies button after clicked
       // let getMoviesBtn:any = document.getElementById("getMoviesBtn");
       // getMoviesBtn.hidden=false;
 
-    })
+    
   }
 
   //create a randomized list of 10 movies
@@ -88,7 +103,20 @@ export class DecisionsComponent implements OnInit {
       film[j] = temp;      //new element is picked
     }
     this.tenMovies = film.slice(0, 10); //reduce randomized list to 10 movies
-  
+
+
+    for(i=this.tenMovies.length-1; i>0;i--){
+     let movie = new Decisions({imdbId:this.tenMovies[i].id})
+     this.decisionsService.postLiked(movie).subscribe({
+      next:()=>{
+        console.log(movie);
+        // console.log(this.decisions);
+        
+        
+      },
+      error:()=>{console.log("something went wrong");}
+    });
+    }
     this.getIMDBTitles(this.tenMovies);
     this.makeDecision(this.tenMovies);
   }
@@ -165,7 +193,9 @@ export class DecisionsComponent implements OnInit {
         let appendedMovie = this.oneMovieArray.push(oneMovie);
 
         console.log(this.decisions)
-        return false;
+        // return false;
+        this.addLiked()
+
       })
     }
   }

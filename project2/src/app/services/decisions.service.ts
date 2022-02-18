@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { DecisionsComponent } from '../decisions/decisions.component';
 import { Decisions } from '../models/decisions';
@@ -21,10 +22,18 @@ export class DecisionsService {
     //k_06em724z
   }
 
+  // postLiked(decisions:Decisions):Observable<Decisions>{
+  //   let body:Decisions=decisions;
+  //   console.log(body);
+    
+  //   return this.http.post<Decisions>(this.url + "decisions", body);
+  // }
+  //   // return this.http.post(this.url + "decisions", decisions, {withCredentials: true});
+  // }
   postLiked(decisions:Decisions){
 
     console.log(decisions)
-    return this.http.post<Decisions>(this.url + "decisions", decisions, {withCredentials: true});
+    return this.http.post(this.url + "decisions", decisions, {withCredentials: true});
 
   }
 }

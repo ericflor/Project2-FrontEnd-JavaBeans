@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
         }
 
         this.cookieService.set("upNext_user", JSON.stringify(data.body));
-        console.log(this.cookieService.get("upNext_user"));
+        //console.log(this.cookieService.get("upNext_user"));
         //console.log(this.user)
       },
       error:()=>{this.show2 = true; console.log("Invalid Credentials")},

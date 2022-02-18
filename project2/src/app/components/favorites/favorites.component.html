@@ -1,16 +1,17 @@
-<br>
-<p>Type in a movie you want to see!</p>
 
-<input type="text" [(ngModel)]="searchName">
-<button type="button" class="btn btn-success" (click)="searchFavs(searchName)">Search</button>
+<p class="d-flex justify-content-center" style="color:black">Type in a movie you want to see!</p>
+<div class="d-flex justify-content-center">
+    <input type="text" [(ngModel)]="searchName">
+    <button type="button" class="btn btn-success" (click)="searchFavs(searchName)">Search</button>
+</div>
 <br>
 <br>
 <table *ngIf="movie" class="table">
     <tr>
-        <th>Movie Name</th>
-        <th>Release Date</th>
-        <th>Poster</th>
-        <th>Favorite</th>
+        <th style="color: white;">Movie Name</th>
+        <th style="color: white;">Release Date</th>
+        <th style="color: white;">Poster</th>
+        <th style="color: white;">Favorite</th>
     </tr>
     <tr>
         <td>{{movie.results[0].title}}</td>

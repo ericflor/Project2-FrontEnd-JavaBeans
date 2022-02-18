@@ -22,8 +22,12 @@ export class GroupService {
     return this.http.post<User>(this.url+"group", new Group({name:name, open:true}), {withCredentials:true});
   }
 
+  joinGroup(id:number){
+    return this.http.put<User>(this.url+"group/join/"+id, null, {withCredentials:true})
+  }
+
   updateGroup(group:Group){
-    return this.http.put<Group>(this.url+"group", group, {withCredentials:true});
+    return this.http.put<User>(this.url+"group", group, {withCredentials:true});
   }
 
   leaveGroup(){

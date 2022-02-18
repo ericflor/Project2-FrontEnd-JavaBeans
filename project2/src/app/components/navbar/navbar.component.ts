@@ -21,9 +21,11 @@ export class NavbarComponent implements OnInit {
 
   logout(){
     this.http.post(this.url + "logout", {observe:'response', withCredentials:true}).subscribe({
-      next:()=>{this.cookieService.deleteAll()}
-      
+      next:()=>{this.cookieService.delete("upNext_user")},
+      complete:()=>{this.cookieService.delete("upNext_user")}
     });
+    this.cookieService.delete("upNext_user");
+    this.cookieService.deleteAll();
     console.log("Logged Out")
   }
 

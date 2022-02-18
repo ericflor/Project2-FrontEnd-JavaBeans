@@ -18,6 +18,7 @@ export class FavoritesComponent implements OnInit {
   movie: any;
   searchName: string = '';
   user:User = new User();
+  
 
   constructor(private favoriteService:FavoritesService, private http:HttpClient, private cookieService: CookieService) { }
 

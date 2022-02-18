@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 import { Decisions } from '../models/decisions';
+import { User } from '../models/user';
 import { DecisionsService } from '../services/decisions.service';
 
 
@@ -35,9 +38,22 @@ export class DecisionsComponent implements OnInit {
     userId: 0
   }
 
-  constructor(private decisionsService: DecisionsService, private http: HttpClient) { }
+  constructor(private router: Router, private decisionsService: DecisionsService, private http: HttpClient) { }
 
   ngOnInit(): void {
+
+    this.http.get<User>(environment.serverURL + "user/current", {withCredentials: true}).subscribe({
+      next: response=>{
+        if(response.group==null){
+          this.router.navigate([`user`]);
+        }
+      },
+      error:()=>{
+        console.log("here")
+        this.router.navigate([`login`]);
+      }
+    })
+
   }
 
   stockImg() {

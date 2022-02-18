@@ -168,7 +168,9 @@ export class DecisionsComponent implements OnInit {
         let appendedMovie = this.oneMovieArray.push(oneMovie);
 
         console.log(this.decisions)
-        return false;
+        // return false;
+        this.addLiked()
+
       })
     }
   }

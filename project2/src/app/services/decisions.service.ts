@@ -19,18 +19,7 @@ export class DecisionsService {
     return this.http.get<Decisions>(this.apiURL);
   }
 
-  // postLiked(decisions:Decisions):Observable<Decisions>{
-  //   let body:Decisions=decisions;
-  //   console.log(body);
-    
-  //   return this.http.post<Decisions>(this.url + "decisions", body);
-  // }
-  //   // return this.http.post(this.url + "decisions", decisions, {withCredentials: true});
-  // }
   postLiked(decisions:Decisions){
-
-    console.log(decisions)
-    return this.http.post(this.url + "decisions", new Decisions(0, 1, "", "", true, 1), {withCredentials: true});
-
+    return this.http.post(this.url + "decisions", decisions, {withCredentials: true});
   }
 }

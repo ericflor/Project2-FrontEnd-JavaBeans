@@ -1,15 +1,15 @@
 <app-navbar></app-navbar>
 <div class="container">
     <header class="header">
-      <h1 class="d-flex justify-content-center">PROFILE</h1>
+      <h1 style="color:black" class="d-flex justify-content-center">PROFILE</h1>
       <div class="d-flex justify-content-center">
         
         <p>
-          <b>Username:</b> {{user.username}} 
+          <b style="color:black"for="user" class="label form-label">Username:</b> {{user.username}} 
           <br>      
-          <b>Full Name:</b> {{user.firstName}} {{user.lastName}}
+          <b style="color:black"for="user" class="label form-label">Full Name:</b> {{user.firstName}} {{user.lastName}}
           <br>      
-          <b>Email: </b> {{user.email}}
+          <b style="color:black"for="user" class="label form-label">Email: </b> {{user.email}}
         </p>
       </div>
       
@@ -17,7 +17,7 @@
   
     <!-- Replace <div> with <aside> if your content has one aside. For more than one, nest <aside> elements in the <div>. -->
     <div>
-      <h3>GROUP</h3>
+      <h3 style="color:black" for="user" class="label form-label">GROUP</h3>
       <app-group></app-group>
     </div>
   
@@ -27,7 +27,7 @@
   
  
     <div>
-      <h3>FAVORITES</h3>
+      <h3 style="color:black" for="user" class="label form-label">FAVORITES</h3>
       <p>{{imdbId}}</p>
       <p>{{movie1}}</p>
       <p>{{movie2}}</p>

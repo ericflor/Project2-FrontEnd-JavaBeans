@@ -23,6 +23,7 @@
     position: absolute;
     padding: 90px 70px 50px 70px;
     background: #00B0F0;
+    background-image: linear-gradient(to right, #00B0F0, #5B9BD5);
 }
 .login-snip .login,
 .login-snip .sign-up-form {

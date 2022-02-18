@@ -1,4 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
+import { LoginComponent } from '../login/login.component';
+import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +12,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  url: String = environment.serverURL;
+
+  constructor(private router: Router, private http:HttpClient, private cookieService: CookieService) { }
 
   ngOnInit(): void {
+  }
+
+  logout(){
+    this.http.post(this.url + "logout", {observe:'response', withCredentials:true}).subscribe({
+      next:()=>{this.cookieService.deleteAll()}
+      
+    });
+    console.log("Logged Out")
+  }
+
+  goToPage(pageName:string){
+    this.router.navigate([`${pageName}`]);
   }
 
 }

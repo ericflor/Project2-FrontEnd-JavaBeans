@@ -32,13 +32,15 @@ export class LoginComponent implements OnInit {
     this.httpClient.post<User>(this.url + "login", {"username":this.username, "password":this.password}, {observe:'response', withCredentials:true}).subscribe({
       next:(data:any)=>{
         this.user = data.body;
+
+        this.cookieService.set("upNext_user", JSON.stringify(data.body));
     
         if(this.user != null){ 
           console.log("logged in!");
           this.router.navigate(['user']); // if login succesful, route to user-profile page
         }
 
-        this.cookieService.set("upNext_user", JSON.stringify(data.body));
+       
         //console.log(this.cookieService.get("upNext_user"));
         //console.log(this.user)
       },

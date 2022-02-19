@@ -5,9 +5,15 @@
     <button class="btn btn-primary m-2" (click)="open(joinIn)">Join Group</button>
 </div>
 <ng-template #groupTitle>
-    <h4 style="color:black">Your group:</h4>
-    <h2>{{user.group.name}}</h2>
-    <button *ngIf="user.roleId==2" class="btn btn-primary m-2" (click)="open(applyUpdates)">Update Group</button>
+    <h5 style="color:black">Your group:</h5>
+    <p>{{user.group.name}}</p>
+    <h5 style="color:black">Group Status:</h5>
+    <p>{{(user.group.open)?'Open':'Closed'}}</p>
+    <div *ngIf="user.roleId==2">
+        <h5 style="color:black">Group ID:</h5>
+        <p>{{user.group.id}}</p>
+        <button class="btn btn-primary m-2" (click)="open(applyUpdates)">Update Group</button>
+    </div>
     <button class="btn btn-primary m-2" (click)="leaveGroup()">Leave Group</button>
 </ng-template>
 

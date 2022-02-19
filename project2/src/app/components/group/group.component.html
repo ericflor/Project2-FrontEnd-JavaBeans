@@ -9,6 +9,7 @@
     <h2>{{user.group.name}}</h2>
     <button *ngIf="user.roleId==2" class="btn btn-primary m-2" (click)="open(applyUpdates)">Update Group</button>
     <button class="btn btn-primary m-2" (click)="leaveGroup()">Leave Group</button>
+    <button class="btn btn-primary m-2" (click)="goToPage('decisions')">Find a movie!</button>
 </ng-template>
 
 <ng-template #createName let-modal>

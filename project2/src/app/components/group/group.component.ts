@@ -6,6 +6,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { User } from 'src/app/models/user';
 import { CookieService } from 'ngx-cookie-service';
 import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-group',
@@ -26,6 +27,7 @@ export class GroupComponent implements OnInit {
     private userService:UserService,
     private modalService: NgbModal, 
     private cookieService: CookieService,
+    private router: Router
     ){}
 
     
@@ -41,6 +43,10 @@ export class GroupComponent implements OnInit {
         }
       }
     })
+  }
+
+  goToPage(pageName:string){
+    this.router.navigate([`${pageName}`]);
   }
 
   open(content:any) {

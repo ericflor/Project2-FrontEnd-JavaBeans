@@ -1,2 +1,49 @@
-<p>user-profile works!</p>
-<app-favorites></app-favorites>
+<app-navbar></app-navbar>
+<!-- <app-user-profile #userProfile></app-user-profile> -->
+<div class="container">
+    <header class="header">
+      <h1 style="color:black" class="d-flex justify-content-center">PROFILE</h1>
+      <div class="d-flex justify-content-center">
+        
+        <p>
+          <b style="color:black"for="user" class="label form-label">Username:</b> {{user.username}} 
+          <br>      
+          <b style="color:black"for="user" class="label form-label">Full Name:</b> {{user.firstName}} {{user.lastName}}
+          <br>      
+          <b style="color:black"for="user" class="label form-label">Email: </b> {{user.email}}
+        </p>
+      </div>
+      
+    </header>
+  
+    <!-- Replace <div> with <aside> if your content has one aside. For more than one, nest <aside> elements in the <div>. -->
+    <div>
+      <h3 style="color:black" for="user" class="label form-label">GROUP</h3>
+      <app-group></app-group>
+    </div>
+  
+    <main class="content">
+      <p><app-favorites></app-favorites></p>
+    </main>
+  
+ 
+    <div>
+      <h3 style="color:black" for="user" class="label form-label">FAVORITES</h3>
+      <p>{{imdbId}}</p>
+      <p>{{movie1}}</p>
+      <p>{{movie2}}</p>
+      <p>{{movie3}}</p>
+      <p>{{movie4}}</p>
+      <p>{{movie5}}</p>
+      <p>{{movie6}}</p>
+      <p>{{movie7}}</p>
+      <p>{{movie8}}</p>
+      <p>{{movie9}}</p>
+    </div>
+  
+    <!-- <footer class="footer">
+      <p>footer</p>
+    </footer> -->
+  </div>
+  
+<router-outlet></router-outlet>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { FavoritesComponent } from './components/favorites/favorites.component';
 import { GroupComponent } from './components/group/group.component';
 import { LoginComponent } from './components/login/login.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
@@ -14,6 +15,12 @@ component: DecisionsComponent
 },{
   path : "group",
   component : GroupComponent
+},{
+  path : "user",
+  component : UserProfileComponent
+},{
+  path : "fav",
+  component : FavoritesComponent
 }
 ];
 

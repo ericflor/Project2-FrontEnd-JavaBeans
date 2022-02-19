@@ -74,7 +74,7 @@ export class FavoritesComponent implements OnInit {
     });
   }
 
-  addFav2(){
+  addFav2(){ 
     
     this.favoriteService.postFavs(this.movie.results[1].title).subscribe({
       next:(response)=>{

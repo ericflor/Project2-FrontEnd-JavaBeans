@@ -11,41 +11,22 @@
 
 
     <img [src]=
-    "tenMovies[0].image"
->>>>>>> d0444884712533d5f36ea81bdb7b6c40b5a3940f
-     class="card-img-top" style=" display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 40%;" alt="...">
-=======
     "tenMovies[0].image" 
      class="card-img-top" style=" display: block; margin-left: auto; margin-right: auto;width: 40%; min-width: 100px; min-height: 200px; max-height: 450px;" 
      alt="movie poster">
->>>>>>> 9e048a0500f6d46764cf627b889d12fd9b22b2cb
 
     <div class="card-body bg-light border border-dark" >
       <h5 id="movieTitle" class="card-title">
         {{tenMovies[0].fullTitle}}
       </h5>
-<<<<<<< HEAD
-      <p  id="movieRating" class="card-text"><small class="text-muted">ImDb Rating: {{tenMovies[0].imDbRating}}</small></p>
-<<<<<<< HEAD
-      <button type="button" id="likeBtn"class="btn btn-success mx-3">Like</button>
-      <button type="button" id="favBtn" class="btn btn-primary mx-3">Favorite</button>
-      <button type="button" id="dislikeBtn" class="btn btn-danger mx-3">Dislike</button>
-=======
-      <button type="button" id="likeBtn"class="btn btn-success mx-3" >Like</button>
-      <button type="button" id="favBtn" class="btn btn-primary mx-3" >Favorite</button>
-      <button type="button" id="dislikeBtn" class="btn btn-danger mx-3" >Dislike</button>
->>>>>>> d0444884712533d5f36ea81bdb7b6c40b5a3940f
-=======
+      
       <p  id="movieRating" class="card-text"><small class="text-muted">IMDb Rating: {{tenMovies[0].imDbRating}}</small></p>
       <button type="button" id="likeBtn"class="btn btn-success mx-3 border border-dark" [hidden]="!visible">Like</button>
       <button type="button" id="favBtn" class="btn btn-info mx-3 border border-dark" [hidden]="!visible">Favorite</button>
       <button type="button" id="dislikeBtn" class="btn btn-danger mx-3 border border-dark" [hidden]="!visible">Dislike</button>
       <button type="button" id="dislikeBtn" class="btn btn-danger mx-3 border border-dark"
               [hidden]="visible">Get Winner</button>
->>>>>>> 9e048a0500f6d46764cf627b889d12fd9b22b2cb
+
     </div>
     </div>
 </div>

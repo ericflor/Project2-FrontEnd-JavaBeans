@@ -113,7 +113,7 @@ export class DecisionsComponent implements OnInit {
     this.tenMovies = film.slice(0, 10); //reduce randomized list to 10 movies
 
 
-    for (i = this.tenMovies.length=1; i >= 0; i--) {
+    for (i = this.tenMovies.length-1; i >= 0; i--) {
       let movie = new Decisions({ 
         imdbId: this.tenMovies[i].id,
         roundId: this.newRound

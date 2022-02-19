@@ -10,12 +10,16 @@ import {Observable, Subject} from 'rxjs';
 export class SharedService {
 
   addFav = new Subject<any>();
+  deleteFav = new Subject<any>();
   value:any;
 
   sendClickEvent() {
     this.addFav.next(this.value);
   }
+
   getClickEvent(): Observable<any>{ 
     return this.addFav.asObservable();
   }
+
+  
 }

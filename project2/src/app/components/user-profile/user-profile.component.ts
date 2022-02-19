@@ -4,8 +4,10 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { SharedService } from 'src/app/event-emitter.service';
+import { User } from 'src/app/models/user';
 import { FavoritesService } from 'src/app/services/favorites.service';
 import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-user-profile',
@@ -19,6 +21,7 @@ export class UserProfileComponent implements OnInit {
   url:any = environment.serverURL;
   user:any;
   user2:any;
+  user3:User = new User();
   imdbId:Array<string> = [];
   list = document.getElementById("movieList");
   data:any;
@@ -42,6 +45,10 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    if(this.cookieService.get("upNext_user") == null){
+      this.router.navigate([`login`]);
+    }
 
     this.http.get(this.url + "user/current", {withCredentials: true}).subscribe({
       next: ()=>{
@@ -71,9 +78,50 @@ export class UserProfileComponent implements OnInit {
 
   populateFavs(){
     
-    
     this.user = JSON.parse(this.cookieService.get("upNext_user"));
     console.log("In Populate Favs Function!");
+    this.movie1 = this.user.favs[0].imdbId;
+    this.movie2 = this.user.favs[1].imdbId;
+    this.movie3 = this.user.favs[2].imdbId;
+    this.movie4 = this.user.favs[3].imdbId;
+    this.movie5 = this.user.favs[4].imdbId;
+    this.movie6 = this.user.favs[5].imdbId;
+    this.movie7 = this.user.favs[6].imdbId;
+    this.movie8 = this.user.favs[7].imdbId;
+    this.movie9 = this.user.favs[8].imdbId;
+  }
+
+  deleteFavs(){
+
+    this.favorite.deleteFavs().subscribe({
+
+      next:(response)=>{
+        this.cookieService.set("upNext_user", JSON.stringify(response.body));
+        this.user = JSON.parse(this.cookieService.get("upNext_user"));
+        console.log("deleting fav!");
+        this.movie1 = " ";
+        this.movie2 = " ";
+        this.movie3 = " ";
+        this.movie4 = " ";
+        this.movie5 = " ";
+        this.movie6 = " ";
+        this.movie7 = " ";
+        this.movie8 = " ";
+        this.movie9 = " ";
+        
+      },
+      error:()=>{console.log("something went wrong deleting your favs")}
+    });
+   
+
+    this.user = JSON.parse(this.cookieService.get("upNext_user"));
+    
+
+  }
+
+  ngOnChanges(changes:SimpleChanges){
+    console.log(changes);
+    this.user = JSON.parse(this.cookieService.get("upNext_user"));
     this.movie1 = this.user.favs[0].imdbId;
     this.movie2 = this.user.favs[1].imdbId;
     this.movie3 = this.user.favs[2].imdbId;

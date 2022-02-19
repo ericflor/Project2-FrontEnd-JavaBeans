@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from 'src/environments/environment';
 import { Favorites } from '../models/favorites';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,8 @@ export class FavoritesService {
 
   }
 
-  getFavs(){}
+  deleteFavs(){
+    return this.http.post<User>(this.url + "favorites/delete", null, {observe:'response', withCredentials: true})
+  }
   
 }

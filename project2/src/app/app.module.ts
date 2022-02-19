@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DecisionsComponent } from './decisions/decisions.component';
 import { GroupComponent } from './components/group/group.component';
 import { CookieService } from 'ngx-cookie-service';
+import { SharedService } from './event-emitter.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { CookieService } from 'ngx-cookie-service';
     NgbModule
   ],
   providers: [
-    CookieService
+    CookieService,
+    SharedService
   ],
   bootstrap: [AppComponent]
 })

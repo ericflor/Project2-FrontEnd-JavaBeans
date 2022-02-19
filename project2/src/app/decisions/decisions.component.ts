@@ -21,13 +21,12 @@ export class DecisionsComponent implements OnInit {
   movieArray: any = []; // randomize which indices from response we receive 
   items: any;
   tenMovies: any;
+ // poster: any = "./imgs/project2-user-flow.jpg";
   movieTitleArray: any;
   likedArray: any = [];
   dislikedArray: any = [];
   favoritesArray: any = [];
   oneMovieArray: any = [];
-  url: string = "https://imdb-api.com/en/API/Top250Movies/k_06em724z/";
-  // decisionBtn: boolean = true;
   visible: boolean = false;
   newRound: number = 0;
   decisions: Decisions = {
@@ -43,22 +42,29 @@ export class DecisionsComponent implements OnInit {
   constructor(private router: Router, private decisionsService: DecisionsService, private http: HttpClient) { }
 
   ngOnInit(): void {
+<<<<<<< HEAD
 
     this.http.get<User>(environment.serverURL + "user/current", { withCredentials: true }).subscribe({
       next: response => {
         if (response.group == null) {
           this.router.navigate([`user`]);
+=======
+    //check to see if user is logged in 
+    this.http.get<User>(environment.serverURL + "user/current", {withCredentials: true}).subscribe({
+      next: response=>{
+        if(response.group==null){ //if valid credentials, stay on page
+          this.router.navigate([`user`]); 
+>>>>>>> 132c3e35f97f8fc7318fe9a43e3fbc739f955e56
         }
         this.user = response
       },
       error: () => {
         console.log("here")
-        this.router.navigate([`login`]);
+        this.router.navigate([`login`]); //if invalid login credentials, redirect to login page
       }
     })
 
   }
-
 
   // populate with array of ten movie objects from Response body of API call to imdbapi 
   getMovies(movieArray: any[]) {
@@ -83,6 +89,7 @@ export class DecisionsComponent implements OnInit {
             this.movieArray.push(data)
           })
         }
+<<<<<<< HEAD
       })
     }
 
@@ -91,6 +98,25 @@ export class DecisionsComponent implements OnInit {
     let getMoviesBtn: any = document.getElementById("getMoviesBtn");
     getMoviesBtn.hidden = false;
 
+=======
+          )}else{
+            this.decisionsService.getRoundMovies(this.newRound++).subscribe(data =>{
+              
+              for(let i=0; i>data.length; i++){
+                this.decisionsService.getOneMovie(data[i]).subscribe(data =>{
+                  this.tenMovies.push(data)
+                })
+              }
+              this.getIMDBTitles(this.tenMovies);
+              this.makeDecision(this.tenMovies);
+            })
+          }
+    
+
+      // Hide get movies button after clicked
+      // let getMoviesBtn:any = document.getElementById("getMoviesBtn");
+      // getMoviesBtn.hidden=false;
+>>>>>>> 132c3e35f97f8fc7318fe9a43e3fbc739f955e56
 
   }
 
@@ -140,6 +166,7 @@ export class DecisionsComponent implements OnInit {
 
       likeBtn.addEventListener("click", () => {
 
+<<<<<<< HEAD
         this.decisions = { //create new decisions object when deciding for each movie
           id: 1,
           roundId: this.newRound,
@@ -168,6 +195,18 @@ export class DecisionsComponent implements OnInit {
         // });
 
 
+=======
+       this.decisions = { //create new decisions object when deciding for each movie
+        id: 1,
+        roundId: this.newRound,
+        imdbId: this.tenMovies[0].id,
+        title: this.tenMovies[0].title,
+        choice: false,
+        userId:0
+       }
+     
+        this.decisions.choice = true        
+>>>>>>> 132c3e35f97f8fc7318fe9a43e3fbc739f955e56
         // Empties one movie array to make it easier to just append the first index of this array each time in html
         this.oneMovieArray = [];
 
@@ -175,6 +214,15 @@ export class DecisionsComponent implements OnInit {
         let oneMovie = this.tenMovies.shift();
         if (this.tenMovies.length == 0) {
           this.visible = false
+          this.decisionsService.getWinner(this.decisions.roundId).subscribe(data => {
+            if (data == "No winner yet!") {
+              alert("No winner yet! Check back soon!")
+            }
+            this.decisionsService.getOneMovie(data).subscribe(data => {
+               this.tenMovies[0] = data 
+             })
+
+          })
           //this.decisionBtn = true
         }
         // grab that movie in the first index that was shifted out and put it into a liked movies array to hold it
@@ -183,7 +231,6 @@ export class DecisionsComponent implements OnInit {
         // Takes the shifted movie and puts it into a seperate array we call in the html to append it to the page.
         let appendedMovie = this.oneMovieArray.push(oneMovie);
         console.log(this.decisions)
-        // return true;
         this.addLiked()
       })
       dislikeBtn.addEventListener("click", () => {
@@ -196,14 +243,23 @@ export class DecisionsComponent implements OnInit {
           userId: 0
         }
         this.decisions.choice = false
+<<<<<<< HEAD
         this.decisionsService.postLiked(this.decisions)
         // Empties one movie array to make it easier to just append the first index of this array each time in html
+=======
+         // Empties one movie array to make it easier to just append the first index of this array each time in html
+>>>>>>> 132c3e35f97f8fc7318fe9a43e3fbc739f955e56
         this.oneMovieArray = [];
 
         // takes first index in tenmovies array, takes it out of the array and returns it
         let oneMovie = this.tenMovies.shift();
         if (this.tenMovies.length == 0) {
+<<<<<<< HEAD
           this.visible = false
+=======
+           
+           this.visible = false
+>>>>>>> 132c3e35f97f8fc7318fe9a43e3fbc739f955e56
           //this.decisionBtn = true
         }
         // grab that movie in the first index that was shifted out and put it into a disliked movies array to hold it
@@ -219,6 +275,7 @@ export class DecisionsComponent implements OnInit {
       })
     }
   }
+<<<<<<< HEAD
   addLiked() {
     this.decisionsService.postLiked(this.decisions).subscribe({
       next: () => {
@@ -230,4 +287,15 @@ export class DecisionsComponent implements OnInit {
       error: () => { console.log("something went wrong"); }
     });
   }
+=======
+addLiked(){
+  this.decisionsService.postLiked(this.decisions).subscribe({
+    next:()=>{
+      console.log("added like to db");
+      console.log(this.decisions);    
+    },
+    error:()=>{console.log("something went wrong");}
+  });
+}
+>>>>>>> 132c3e35f97f8fc7318fe9a43e3fbc739f955e56
 }

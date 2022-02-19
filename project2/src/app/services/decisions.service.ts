@@ -11,12 +11,14 @@ import { Decisions } from '../models/decisions';
 export class DecisionsService {
 
   url: string = environment.serverURL;
-  apiURL: string = "https://imdb-api.com/en/API/Top250Movies/k_19lmdqtz"
+  apiURL: string = environment.apiURL
   constructor(private http:HttpClient) { }
 
   getMovies(){
-    //return this.http.get<Decisions>(this.url + "decisions");
-    return this.http.get<Decisions>(this.apiURL);
+
+    return this.http.get<Decisions>(this.apiURL + 'Top250Movies/k_19lmdqtz/');
+    //k_19lmdqtz
+    //k_06em724z
   }
 
   postLiked(decisions:Decisions){
@@ -32,5 +34,9 @@ export class DecisionsService {
 
   getOneMovie(movie:string){
     return this.http.get(environment.apiURL + "title/k_19lmdqtz/"+ movie)
+  }
+
+  getWinner(roundId:number) {
+    return this.http.get<string>(this.url + "decisions/winner/" + roundId, {withCredentials: true})
   }
 }

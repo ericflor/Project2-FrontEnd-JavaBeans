@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
-  url: String = environment.serverURL;
+  url: string = environment.serverURL;
 
   constructor(private router: Router, private http:HttpClient, private cookieService: CookieService) { }
 

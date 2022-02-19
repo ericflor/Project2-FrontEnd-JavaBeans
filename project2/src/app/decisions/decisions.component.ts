@@ -42,25 +42,22 @@ export class DecisionsComponent implements OnInit {
   constructor(private router: Router, private decisionsService: DecisionsService, private http: HttpClient) { }
 
   ngOnInit(): void {
-
+    //check to see if user is logged in 
     this.http.get<User>(environment.serverURL + "user/current", {withCredentials: true}).subscribe({
       next: response=>{
-        if(response.group==null){
-          this.router.navigate([`user`]);
+        if(response.group==null){ //if valid credentials, stay on page
+          this.router.navigate([`user`]); 
         }
         this.user=response
       },
       error:()=>{
         console.log("here")
-        this.router.navigate([`login`]);
+        this.router.navigate([`login`]); //if invalid login credentials, redirect to login page
       }
     })
 
   }
 
-  stockImg() {
-    let pic = "imgs/stock_movie.jpg" 
-  }
   // populate with array of ten movie objects from Response body of API call to imdbapi 
   getMovies(movieArray: any[]) {
     this.visible = true   //make button disappear when clicked
@@ -80,9 +77,11 @@ export class DecisionsComponent implements OnInit {
               
               for(let i=0; i>data.length; i++){
                 this.decisionsService.getOneMovie(data[i]).subscribe(data =>{
-                  this.movieArray.push(data)
+                  this.tenMovies.push(data)
                 })
               }
+              this.getIMDBTitles(this.tenMovies);
+              this.makeDecision(this.tenMovies);
             })
           }
     
@@ -157,6 +156,15 @@ export class DecisionsComponent implements OnInit {
         let oneMovie = this.tenMovies.shift();
         if (this.tenMovies.length == 0) {
           this.visible = false
+          this.decisionsService.getWinner(this.decisions.roundId).subscribe(data => {
+            if (data == "No winner yet!") {
+              alert("No winner yet! Check back soon!")
+            }
+            this.decisionsService.getOneMovie(data).subscribe(data => {
+               this.tenMovies[0] = data 
+             })
+
+          })
           //this.decisionBtn = true
         }
         // grab that movie in the first index that was shifted out and put it into a liked movies array to hold it
@@ -182,7 +190,8 @@ export class DecisionsComponent implements OnInit {
 
         // takes first index in tenmovies array, takes it out of the array and returns it
         let oneMovie = this.tenMovies.shift();
-         if (this.tenMovies.length == 0) {
+        if (this.tenMovies.length == 0) {
+           
            this.visible = false
           //this.decisionBtn = true
         }

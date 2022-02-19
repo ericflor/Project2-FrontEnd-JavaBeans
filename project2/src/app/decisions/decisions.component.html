@@ -19,9 +19,11 @@
         {{tenMovies[0].fullTitle}}
       </h5>
       <p  id="movieRating" class="card-text"><small class="text-muted">IMDb Rating: {{tenMovies[0].imDbRating}}</small></p>
-      <button type="button" id="likeBtn"class="btn btn-success mx-3 border border-dark" >Like</button>
-      <button type="button" id="favBtn" class="btn btn-info mx-3 border border-dark" >Favorite</button>
-      <button type="button" id="dislikeBtn" class="btn btn-danger mx-3 border border-dark" >Dislike</button>
+      <button type="button" id="likeBtn"class="btn btn-success mx-3 border border-dark" [hidden]="!visible">Like</button>
+      <button type="button" id="favBtn" class="btn btn-info mx-3 border border-dark" [hidden]="!visible">Favorite</button>
+      <button type="button" id="dislikeBtn" class="btn btn-danger mx-3 border border-dark" [hidden]="!visible">Dislike</button>
+      <button type="button" id="dislikeBtn" class="btn btn-danger mx-3 border border-dark"
+              [hidden]="visible">Get Winner</button>
     </div>
     </div>
 </div>

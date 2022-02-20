@@ -1,12 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { Observable, forkJoin } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
+import { SharedService } from '../event-emitter.service';
 import { Decisions } from '../models/decisions';
 import { User } from '../models/user';
 import { DecisionsService } from '../services/decisions.service';
+import { FavoritesService } from '../services/favorites.service';
 
 
 @Component({
@@ -41,8 +44,17 @@ export class DecisionsComponent implements OnInit {
   };
   thisRound: Decisions[] = [];
   user: User = new User()
+  toggle = true;
+  status = 'Favorite';
 
-  constructor(private router: Router, private decisionsService: DecisionsService, private http: HttpClient) { }
+
+  constructor(
+    private router: Router, 
+    private decisionsService: DecisionsService, 
+    private http: HttpClient, 
+    private favoriteService: FavoritesService,
+    private sharedService: SharedService,
+    private cookieService: CookieService) { }
 
   ngOnInit(): void {
     //check to see if user is logged in 
@@ -360,5 +372,19 @@ export class DecisionsComponent implements OnInit {
       })
 
     })
+  }
+
+  addFav(){
+    this.favoriteService.postFavs(this.tenMovies[0].title).subscribe({
+      next:(response)=>{
+        this.cookieService.set("upNext_user", JSON.stringify(response.body));
+        this.user = JSON.parse(this.cookieService.get("upNext_user"));
+        this.sharedService.sendClickEvent();
+        console.log(this.tenMovies[0])
+        this.toggle = !this.toggle;
+        this.status = this.toggle ? 'Favorite' : 'Favorited';
+
+      }
+    });
   }
 }

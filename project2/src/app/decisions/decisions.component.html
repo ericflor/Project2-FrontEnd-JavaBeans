@@ -22,7 +22,8 @@
       
       <p  id="movieRating" class="card-text"><small class="text-muted">IMDb Rating: {{tenMovies[0].imDbRating}}</small></p>
       <button type="button" id="likeBtn"class="btn btn-success mx-3 border border-dark" [hidden]="!visible">Like</button>
-      <button type="button" id="favBtn" class="btn btn-info mx-3 border border-dark" [hidden]="!visible">Favorite</button>
+      <button type="button" id="favBtn" class="btn mx-3 border border-dark" [ngClass]="{'btn-info' : toggle, 'btn-secondary': !toggle}"
+      [hidden]="!visible" (click)="addFav()">{{status}}</button>
       <button type="button" id="dislikeBtn" class="btn btn-danger mx-3 border border-dark" [hidden]="!visible">Dislike</button>
       <button type="button" id="getWinnerBtn" class="btn btn-danger mx-3 border border-dark" (click)= "getWinner()">Get Winner</button>
     </div>

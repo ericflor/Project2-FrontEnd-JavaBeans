@@ -262,7 +262,6 @@ export class DecisionsComponent implements OnInit {
         let oneMovie = this.tenMovies.shift();
         if (this.tenMovies.length == 0) {
           this.visible = false
-<<<<<<< HEAD
           this.decisionsService.getWinner().subscribe(data => {
             if (data == "No winner yet!") {
               alert("No winner yet! Check back soon!")
@@ -272,9 +271,6 @@ export class DecisionsComponent implements OnInit {
              })
 
           })
-=======
-         
->>>>>>> f24c94a94738c2526691421cf52b674385b39c8a
           //this.decisionBtn = true
         }
         // grab that movie in the first index that was shifted out and put it into a liked movies array to hold it
@@ -331,14 +327,19 @@ export class DecisionsComponent implements OnInit {
   }
 
   getWinner(){
-    this.decisionsService.getWinner(this.decisions.roundId).subscribe(data => {
+    this.decisionsService.getWinner().subscribe(data => {
+      console.log("Got from service")
       console.log(data);
       
       if (data == "No winner yet!") {
         alert("No winner yet! Check back soon!")
       }
       this.decisionsService.getOneMovie(data).subscribe(data => {
-        this.tenMovies[0] = data
+        console.log("in get one movie")
+        console.log(data)
+        this.tenMovies = []
+        this.tenMovies.push(data)
+        console.log(this.tenMovies[0])
         console.log(data);
 
       })

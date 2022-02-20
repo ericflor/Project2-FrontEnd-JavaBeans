@@ -38,16 +38,10 @@ export class DecisionsService {
     return this.http.get<Decisions>(environment.apiURL + "title/k_xfz4se0z/"+ movie)
   }
 
-<<<<<<< HEAD
   getWinner() {
-    return this.http.get<string>(this.url + "decisions/winner", {withCredentials: true})
-=======
+    return this.http.get(this.url + "decisions/winner", {withCredentials: true, responseType: 'text'})
   // getOneMovie(movie:string){
   //   return this.http.get(this.url + "decisions/round/"+ movie)
-  // }
+ }
 
-  getWinner(roundId:number) {
-    return this.http.get<string>(this.url + "decisions/winner/" + roundId, {withCredentials: true})
->>>>>>> f24c94a94738c2526691421cf52b674385b39c8a
-  }
 }

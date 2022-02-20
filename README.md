@@ -22,7 +22,7 @@ Back end repository (https://github.com/ericflor/Project2-BackEnd-JavaBeans.git)
 
 - Update their information
 
-- Users will be served a selection of movies/shows through the ImDb API
+- Users will be served a selection of movies/shows through the IMDb API
 
 - Requirement 1: Users can search for and favorite movies
 
@@ -45,5 +45,5 @@ Back end repository (https://github.com/ericflor/Project2-BackEnd-JavaBeans.git)
 - HTML5
 - CSS
 - Bootstrap 5.1
-- ImDb API
+- IMDb API
 

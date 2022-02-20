@@ -1,11 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'ngx-cookie-service';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { SharedService } from 'src/app/event-emitter.service';
 import { User } from 'src/app/models/user';
 import { FavoritesService } from 'src/app/services/favorites.service';
+import { UserService } from 'src/app/services/user.service';
 import { environment } from 'src/environments/environment';
 
 
@@ -40,7 +42,14 @@ export class UserProfileComponent implements OnInit {
   email:any;
   clickEventSubscription:Subscription | undefined;
 
-  constructor(private sharedService:SharedService, private router: Router, private cookieService: CookieService, private http:HttpClient, private favorite:FavoritesService) { 
+  constructor(
+    private sharedService:SharedService, 
+    private router: Router, 
+    private cookieService: CookieService, 
+    private http:HttpClient, 
+    private favorite:FavoritesService,
+    private modalService: NgbModal,
+    private userService: UserService) { 
     
   }
 
@@ -50,9 +59,11 @@ export class UserProfileComponent implements OnInit {
       this.router.navigate([`login`]);
     }
 
-    this.http.get(this.url + "user/current", {withCredentials: true}).subscribe({
-      next: ()=>{
+    this.http.get<User>(this.url + "user/current", {withCredentials: true, observe:'response'}).subscribe({
+      next: response=>{
         this.user = JSON.parse(this.cookieService.get("upNext_user"));
+        this.user3 = response.body ?? new User();
+        console.log(this.user3)
         console.log("In Next");
         this.movie1 = this.user.favs[0].imdbId;
         this.movie2 = this.user.favs[1].imdbId;
@@ -131,6 +142,21 @@ export class UserProfileComponent implements OnInit {
     this.movie7 = this.user.favs[6].imdbId;
     this.movie8 = this.user.favs[7].imdbId;
     this.movie9 = this.user.favs[8].imdbId;
+  }
+
+  open(content:any) {
+    this.modalService.open(content).result.then(()=>{
+      // this.user.firstName = this.firstName;
+      // this.user.lastName = this.lastName;
+      // this.user.email = this.email;
+      // this.user.username = this.username;
+      console.log(this.user3.firstName)
+      console.log(this.user3)
+      this.cookieService.set("upNext_user", JSON.stringify(this.user3));
+      this.userService.updateUser(this.user3).subscribe(()=>{console.log("?????????")});
+        this.user3.password="";
+      }
+    );
   }
 
 

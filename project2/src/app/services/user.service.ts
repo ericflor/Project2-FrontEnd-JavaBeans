@@ -14,4 +14,10 @@ export class UserService {
   getCurrentUser(){
     return this.http.get<User>(this.url+"user/current", {withCredentials:true, observe:'response'});
   }
+
+  updateUser(user:User){
+    console.log(user)
+    return this.http.post(this.url+"user/update", user, {withCredentials:true});
+    
+  }
 }

@@ -6,12 +6,16 @@
       <div class="d-flex justify-content-center">
         
         <p>
-          <b style="color:black"for="user" class="label form-label">Username:</b> {{user.username}} 
+          <b style="color:black"for="user" class="label form-label">Username:</b> {{user3.username}} 
           <br>      
-          <b style="color:black"for="user" class="label form-label">Full Name:</b> {{user.firstName}} {{user.lastName}}
+          <b style="color:black"for="user" class="label form-label">Full Name:</b> {{user3.firstName}} {{user3.lastName}}
           <br>      
-          <b style="color:black"for="user" class="label form-label">Email: </b> {{user.email}}
+          <b style="color:black"for="user" class="label form-label">Email: </b> {{user3.email}}
+          <br>
+          <br>
+          <button class="btn btn-primary" (click)="open(updateInfo)">Update Your Info</button>
         </p>
+        
       </div>
       
     </header>
@@ -46,5 +50,44 @@
       <p>footer</p>
     </footer> -->
   </div>
+
+  <ng-template #updateInfo let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Update Your Info</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">X</button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="mb-3">
+          <label for="id">Username</label>
+          <div class="input-group">
+            <input id="id" type="text" name="inputUserName" [(ngModel)]="user3.username">
+          </div>
+          <label for="id">Password</label> 
+          <div class="input-group">
+            <input id="id" type="text" name="inputPassword" [(ngModel)]="user3.password">
+          </div>
+          <label for="id">First Name</label>
+          <div class="input-group">
+            <input id="id" type="text" name="inputFirstName" [(ngModel)]="user3.firstName">
+          </div>
+          <label for="id">Last Name</label>
+          <div class="input-group">
+            <input id="id" type="text" name="inputLastName" [(ngModel)]="user3.lastName">
+          </div>
+          <label for="id">Email</label>
+          <div class="input-group">
+            <input id="id" type="text" name="inputEmail" [(ngModel)]="user3.email">
+          </div>
+            
+          <!-- <label>{{errorMessage}}</label> -->
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-danger" (click)="modal.dismiss()">Cancel</button>
+      <button type="button" class="btn btn-outline-primary" (click)="modal.close('update')">Update</button>
+    </div>
+  </ng-template>
   
 <router-outlet></router-outlet>

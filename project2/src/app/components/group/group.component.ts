@@ -36,7 +36,7 @@ export class GroupComponent implements OnInit {
     this.userService.getCurrentUser().subscribe({
       next: response=>{
         this.user = response.body ?? new User;
-        console.log(this.user)
+        // console.log(this.user)
         if(response.body?.group==null){
           this.user.group = new Group;
           console.log(this.user)

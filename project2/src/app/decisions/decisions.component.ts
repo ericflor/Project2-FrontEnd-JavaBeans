@@ -168,7 +168,7 @@ export class DecisionsComponent implements OnInit {
         let oneMovie = this.tenMovies.shift();
         if (this.tenMovies.length == 0) {
           this.visible = false
-          this.decisionsService.getWinner(this.decisions.roundId).subscribe(data => {
+          this.decisionsService.getWinner().subscribe(data => {
             if (data == "No winner yet!") {
               alert("No winner yet! Check back soon!")
             }

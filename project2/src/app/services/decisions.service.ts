@@ -36,7 +36,7 @@ export class DecisionsService {
     return this.http.get(environment.apiURL + "title/k_19lmdqtz/"+ movie)
   }
 
-  getWinner(roundId:number) {
-    return this.http.get<string>(this.url + "decisions/winner/" + roundId, {withCredentials: true})
+  getWinner() {
+    return this.http.get<string>(this.url + "decisions/winner", {withCredentials: true})
   }
 }

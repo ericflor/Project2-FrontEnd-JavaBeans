@@ -154,7 +154,7 @@ export class UserProfileComponent implements OnInit {
       console.log(this.user3)
       this.cookieService.set("upNext_user", JSON.stringify(this.user3));
       this.userService.updateUser(this.user3).subscribe(()=>{console.log("?????????")});
-        this.user3.password="";
+        //this.user3.password="";
       }
     );
   }
